@@ -1,8 +1,14 @@
 <mat-toolbar class="header-toolbar">
   <span style="margin-right: 5px">Home</span>
-  <i class="fab fa-xing fa-lg"></i>
+  <i class="fab fa-xing fa-lg" style="margin-right: 15px"></i>
+
+  <div class="header-button-row">
+    <button mat-flat-button>Home</button>
+    <button mat-flat-button="primary">Rooms</button>
+  </div>
+
   <span class="example-spacer"></span>
-  <mat-icon class="example-icon">
-    person
-  </mat-icon>
+  <button mat-icon-button>
+    <mat-icon>person</mat-icon>
+  </button>
 </mat-toolbar>
