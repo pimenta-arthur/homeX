@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule, MatListModule, MatCardModule, MatGridListModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCardModule, MatGridListModule, MatDividerModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -35,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatListModule,
     MatCardModule,
     MatGridListModule,
+    MatDividerModule,
     AppRoutingModule
   ],
   providers: [],
