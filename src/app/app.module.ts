@@ -8,18 +8,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule, MatListModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatCardModule, MatGridListModule } from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app.routing';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     HomeComponent,
     RoomsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,8 @@ import { AppRoutingModule } from './app.routing';
     LayoutModule,
     MatSidenavModule,
     MatListModule,
+    MatCardModule,
+    MatGridListModule,
     AppRoutingModule
   ],
   providers: [],

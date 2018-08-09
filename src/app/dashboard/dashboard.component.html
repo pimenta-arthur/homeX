@@ -1,0 +1,5 @@
+<mat-grid-list cols="4" rowHeight="50px">
+  <mat-grid-tile *ngFor="let room of rooms" [colspan]="room.cols" [rowspan]="room.devices.length" [style.background]="room.color">
+    {{room.name}}
+  </mat-grid-tile>
+</mat-grid-list>
