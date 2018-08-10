@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Add a new room</h2>
+<mat-dialog-content>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput #roomName type="text" maxlength="30" placeholder="Room's name" [(ngModel)]="value" name="roomName">
+      <mat-hint align="end">{{roomName.value.length}} / 30</mat-hint>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button [mat-dialog-close]="value">Yes</button>
+</mat-dialog-actions>

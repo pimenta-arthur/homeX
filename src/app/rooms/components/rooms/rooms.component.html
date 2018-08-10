@@ -1,2 +1,17 @@
-<p *ngFor="let room of rooms" style="color: blue" (click)="removeRoom(room)">{{room.name}}</p>
-<button mat-button (click)="createRoom()">Create Room</button>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Rooms Column -->
+    <ng-container matColumnDef="rooms">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rooms </th>
+        <td mat-cell *matCellDef="let room"> {{room.name}} </td>
+    </ng-container>
+
+    <!-- Devices Column -->
+    <ng-container matColumnDef="devices">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Devices </th>
+        <td mat-cell *matCellDef="let room"> {{room.devices.length}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

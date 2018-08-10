@@ -6,8 +6,9 @@ import {
 } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Device } from "../devices/shared/device";
-import { Room } from "../rooms/shared/room";
+import { Device } from "../../../devices/shared/device";
+import { Room } from "../../../rooms/shared/room";
+import { RoomsService } from "../../../rooms/shared/rooms.service";
 
 @Component({
   selector: "app-dashboard",
@@ -15,6 +16,8 @@ import { Room } from "../rooms/shared/room";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
+  // rooms: Room[];
+
   devicesRoom1: Device[] = [
     { name: "Outside Light", type: "light" },
     { name: "Outside Light", type: "light" },
@@ -50,35 +53,30 @@ export class DashboardComponent implements OnInit {
     {
       name: "Living Room",
       cols: 1,
-      rows: 2,
       color: "lightblue",
       devices: this.devicesRoom1
     },
     {
       name: "Badroom",
       cols: 1,
-      rows: 1,
       color: "lightgreen",
       devices: this.devicesRoom2
     },
     {
       name: "Restroom",
       cols: 1,
-      rows: 3,
       color: "lightpink",
       devices: this.devicesRoom3
     },
     {
       name: "Kitchen",
       cols: 1,
-      rows: 1,
       color: "#DDBDF1",
       devices: this.devicesRoom4
     },
     {
       name: "Kitchen",
       cols: 1,
-      rows: 1,
       color: "#DDBDF1",
       devices: this.devicesRoom4
     }
@@ -88,7 +86,16 @@ export class DashboardComponent implements OnInit {
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private roomsService: RoomsService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let rooms: Room[] = this.roomsService.getRooms();
+
+    for (let room of rooms) {
+      this.rooms.push(room);
+    }
+  }
 }
