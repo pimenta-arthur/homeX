@@ -20,6 +20,7 @@
   height: 45px;
   color: white;
   font-family: 'Open Sans 200', sans-serif;
+  z-index: 9999;
 }
 
 .main-nav-toolbar > 
