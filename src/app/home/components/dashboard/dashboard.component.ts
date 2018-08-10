@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState
-} from "@angular/cdk/layout";
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Device } from "../../../devices/shared/device";
@@ -92,10 +88,12 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let rooms: Room[] = this.roomsService.getRooms();
+    this.roomsService.getRooms.subscribe(data => {
+      let rooms: Room[] = data;
 
-    for (let room of rooms) {
-      this.rooms.push(room);
-    }
+      for (let room of rooms) {
+        this.rooms.push(room);
+      }
+    });
   }
 }

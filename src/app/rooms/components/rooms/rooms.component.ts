@@ -17,7 +17,9 @@ export class RoomsComponent implements OnInit {
   constructor(private roomsService: RoomsService) {}
 
   ngOnInit() {
-    this.rooms = this.roomsService.getRooms();
+    this.roomsService.getRooms.subscribe(data => {
+      this.rooms = data;
+    });
 
     this.dataSource = new MatTableDataSource(this.rooms);
   }
