@@ -12,7 +12,7 @@ import { RoomsService } from "../../../rooms/shared/rooms.service";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-  // rooms: Room[];
+  rooms: Room[];
 
   devicesRoom1: Device[] = [
     { name: "Outside Light", type: "light" },
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     { name: "Living Room Temperature", type: "temperature" }
   ];
 
-  rooms: Room[] = [
+  roomsFixed: Room[] = [
     {
       name: "Living Room",
       cols: 1,
@@ -89,11 +89,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.roomsService.getRooms.subscribe(data => {
-      let rooms: Room[] = data;
-
-      for (let room of rooms) {
-        this.rooms.push(room);
-      }
+      let rooms = this.roomsFixed.concat(data);
+      this.rooms = rooms;
     });
   }
 }
