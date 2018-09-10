@@ -4,7 +4,7 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MainNavComponent } from "./main-nav/main-nav.component";
 import { LayoutModule } from "@angular/cdk/layout";
-import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material";
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatBadgeModule } from "@angular/material";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { AppRoutingModule } from "./app.routing";
 import { RoomsModule } from "./rooms/rooms.module";
@@ -22,7 +22,8 @@ import { AppMaterialModule } from "./app.material.module";
     AppRoutingModule,
     RoomsModule,
     DevicesModule,
-    HomeModule
+    HomeModule,
+    MatBadgeModule
   ],
   entryComponents: [],
   providers: [

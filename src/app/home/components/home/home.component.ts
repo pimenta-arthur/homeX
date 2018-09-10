@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { HomeDialogFabComponent } from "../home-dialog-fab/home-dialog-fab.component";
 import { RoomsService } from "../../../rooms/shared/rooms.service";
-import { Room } from "../../../rooms/shared/room";
-import { Device } from "../../../devices/shared/device";
+import { IRoom } from "../../../rooms/shared/room";
+import { IDevice } from "../../../devices/shared/device";
 
 @Component({
   selector: "app-home",
@@ -28,11 +28,11 @@ export class HomeComponent implements OnInit {
       if (result) {
         this.roomName = result;
 
-        let room: Room = {
+        let room: IRoom = {
           color: "white",
           cols: 1,
           name: this.roomName,
-          devices: new Array<Device>()
+          devices: new Array<IDevice>()
         };
 
         this.roomsService.addRoom(room);

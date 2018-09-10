@@ -1,0 +1,41 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out the device's name</ng-template>
+      <mat-form-field>
+        <input matInput #deviceName placeholder="Ex: Outside Light" maxlength="30" [(ngModel)]="value" name="deviceName" formControlName="firstCtrl"
+          required>
+        <mat-hint align="end">{{deviceName.value.length}} / 30</mat-hint>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <!-- <form [formGroup]="secondFormGroup"> -->
+      <ng-template matStepLabel>Select the device</ng-template>
+      <!-- <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field> -->
+      <mat-list role="list">
+        <mat-divider></mat-divider>
+        <mat-list-item matStepperNext (click)="stepper.next()">item</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item matStepperNext (click)="stepper.next()">item</mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+    <!-- </form> -->
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

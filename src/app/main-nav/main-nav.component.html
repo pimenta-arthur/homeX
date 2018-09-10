@@ -1,39 +1,32 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav 
-    #drawer 
-    class="sidenav" 
-    fixedInViewport="true" 
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'">
-    <mat-toolbar color="primary" class="main-nav-toolbar">Menu</mat-toolbar>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'over'">
+    <mat-toolbar color="primary" class="main-nav-toolbar">
+      Home
+      <i class="fab fa-xing fa-lg" style="margin-left: 5px"></i>
+    </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="rooms">Rooms</a>
-      <a mat-list-item routerLink="Devices">Devices</a>
+      <!-- <a mat-list-item routerLink="rooms">Rooms</a> -->
+      <a mat-list-item routerLink="devices">Devices</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
 
     <mat-toolbar color="primary" class="main-nav-toolbar">
-      <button 
-        type="button" 
-        aria-label="Toggle sidenav" 
-        mat-icon-button 
-        (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <span 
-        style="margin-right: 5px; cursor: pointer;" 
-        routerLink="/home">
+      <span style="cursor: pointer;" routerLink="/home">
         Home
-        <i class="fab fa-xing fa-lg" style="margin-right: 15px"></i>
+        <i class="fab fa-xing fa-lg" style="margin-left: 0px"></i>
       </span>
-      
 
-      <div class="button-row">
+
+      <!-- <div class="button-row">
         <button 
           mat-flat-button 
-          routerLink="/devices"
+          routerLink="devices"
           routerLinkActive="active">
           Devices
         </button>
@@ -43,9 +36,12 @@
           routerLinkActive="active">
           Rooms
         </button>
-      </div>
+      </div> -->
 
       <span class="example-spacer"></span>
+      <button mat-icon-button>
+        <mat-icon matBadge="0" matBadgeColor="warn" matBadgeSize="medium">notifications</mat-icon>
+      </button>
       <button mat-icon-button>
         <mat-icon>person</mat-icon>
       </button>

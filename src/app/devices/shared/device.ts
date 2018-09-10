@@ -1,4 +1,7 @@
-export interface Device {
-    name: string;
-    type: string;
-  }
+import { IDeviceType } from "./device-type";
+
+export interface IDevice {
+  name: string;
+  type: IDeviceType;
+  status?: any;
+}

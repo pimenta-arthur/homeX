@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Device } from "../../../devices/shared/device";
-import { Room } from "../../../rooms/shared/room";
+import { IDevice } from "../../../devices/shared/device";
+import { DeviceType } from "../../../devices/shared/device-type";
+import { IRoom } from "../../../rooms/shared/room";
 import { RoomsService } from "../../../rooms/shared/rooms.service";
 
 @Component({
@@ -12,40 +13,39 @@ import { RoomsService } from "../../../rooms/shared/rooms.service";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
-  rooms: Room[];
+  rooms: IRoom[];
 
-  devicesRoom1: Device[] = [
-    { name: "Outside Light", type: "light" },
-    { name: "Outside Light", type: "light" },
-    { name: "Garage", type: "door" },
-    { name: "Living Room Temperature", type: "temperature" }
+  devicesRoom1: IDevice[] = [
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Open'},
+    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
-  devicesRoom2: Device[] = [
-    { name: "Outside Light", type: "light" },
-    { name: "Garage", type: "door" },
-    { name: "Living Room Temperature", type: "temperature" }
+  devicesRoom2: IDevice[] = [
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
-  devicesRoom3: Device[] = [
-    { name: "Outside Light", type: "light" },
-    { name: "Outside Light", type: "light" },
-    { name: "Garage", type: "door" },
-    { name: "Living Room Temperature", type: "temperature" }
+  devicesRoom3: IDevice[] = [
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
-  devicesRoom4: Device[] = [
-    { name: "Outside Light", type: "light" },
-    { name: "Outside Light", type: "light" },
-    { name: "Outside Light", type: "light" },
-    { name: "Garage", type: "door" },
-    { name: "Living Room Temperature", type: "temperature" },
-    { name: "Outside Light", type: "light" },
-    { name: "Garage", type: "door" },
-    { name: "Living Room Temperature", type: "temperature" }
+  devicesRoom4: IDevice[] = [
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) },
+    { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
+    { name: "Side Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Opened' },
+    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
-  roomsFixed: Room[] = [
+  roomsFixed: IRoom[] = [
     {
       name: "Living Room",
       cols: 1,
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
       devices: this.devicesRoom1
     },
     {
-      name: "Badroom",
+      name: "Mika's Badroom",
       cols: 1,
       color: "lightgreen",
       devices: this.devicesRoom2
@@ -71,10 +71,10 @@ export class DashboardComponent implements OnInit {
       devices: this.devicesRoom4
     },
     {
-      name: "Kitchen",
+      name: "Thor's Badroom",
       cols: 1,
-      color: "#DDBDF1",
-      devices: this.devicesRoom4
+      color: "#dec7ce",
+      devices: this.devicesRoom1
     }
   ];
 

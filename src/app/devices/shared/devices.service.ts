@@ -1,24 +1,24 @@
 import { Injectable } from "@angular/core";
-import { Device } from "./device";
+import { IDevice } from "./device";
 
 @Injectable()
 export class DevicesService {
   constructor() {}
 
-  private _devices: Device[];
+  private _devices: IDevice[];
 
-  addDevice(device: Device): void {
+  addDevice(device: IDevice): void {
     this._devices.push(device);
   }
 
-  removeDevice(device: Device): void {
+  removeDevice(device: IDevice): void {
     var index = this._devices.indexOf(device);
     if (index != -1) {
       this._devices.splice(index, 1);
     }
   }
 
-  getDevices(): Device[] {
+  getDevices(): IDevice[] {
     return this._devices;
   }
 }

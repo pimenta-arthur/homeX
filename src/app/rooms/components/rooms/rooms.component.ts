@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RoomsService } from "../../shared/rooms.service";
-import { Room } from "../../shared/room";
-import { Device } from "../../../devices/shared/device";
+import { IRoom } from "../../shared/room";
+import { IDevice } from "../../../devices/shared/device";
 import { MatTableDataSource } from "@angular/material";
 
 @Component({
@@ -10,21 +10,29 @@ import { MatTableDataSource } from "@angular/material";
   styleUrls: ["./rooms.component.scss"]
 })
 export class RoomsComponent implements OnInit {
-  rooms: Room[];
+  rooms: IRoom[];
   displayedColumns: string[] = ["rooms", "devices"];
-  dataSource: MatTableDataSource<Room>;
+  dataSource: MatTableDataSource<IRoom>;
 
   constructor(private roomsService: RoomsService) {}
 
   ngOnInit() {
     this.roomsService.getRooms.subscribe(data => {
       this.rooms = data;
-    });
 
-    this.dataSource = new MatTableDataSource(this.rooms);
+      this.dataSource = new MatTableDataSource(this.rooms);
+    });
   }
 
-  removeRoom(room: Room): void {
+  openDialog(): void {
+    //bla
+  }
+
+  removeRoom(room: IRoom): void {
     this.roomsService.removeRoom(room);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

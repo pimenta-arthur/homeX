@@ -1,25 +1,25 @@
 import { Injectable } from "@angular/core";
-import { Room } from "./room";
+import { IRoom } from "./room";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class RoomsService {
   constructor() {}
 
-  private _rooms: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
+  private _rooms: BehaviorSubject<IRoom[]> = new BehaviorSubject<IRoom[]>([]);
 
-  addRoom(room: Room): void {
+  addRoom(room: IRoom): void {
     this._rooms.next(this._rooms.getValue().concat(room));
   }
 
-  removeRoom(room: Room): void {
+  removeRoom(room: IRoom): void {
     var index = this._rooms.getValue().indexOf(room);
     if (index != -1) {
       this._rooms.getValue().splice(index, 1);
     }
   }
 
-  get getRooms(): BehaviorSubject<Room[]> {
+  get getRooms(): BehaviorSubject<IRoom[]> {
     return this._rooms;
   }
 }

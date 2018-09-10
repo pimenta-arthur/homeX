@@ -1,8 +1,8 @@
-import { Device } from "../../devices/shared/device";
+import { IDevice } from "../../devices/shared/device";
 
-export interface Room {
+export interface IRoom {
   color: string;
   cols: number;
   name: string;
-  devices: Device[];
+  devices: IDevice[];
 }
