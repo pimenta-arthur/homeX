@@ -6,7 +6,9 @@ export interface IDeviceType {
 export enum DeviceType {
   Light,
   Door,
-  Temperature
+  Temperature,
+  Power,
+  Occupancy
 }
 
 export namespace DeviceType {
@@ -30,6 +32,18 @@ export namespace DeviceType {
         _type = {
           name: "temperature",
           icon: "opacity"
+        };
+        return _type;
+      case DeviceType.Power:
+        _type = {
+          name: "power",
+          icon: "power"
+        };
+        return _type;
+      case DeviceType.Occupancy:
+        _type = {
+          name: "occupancy",
+          icon: "transfer_within_a_station"
         };
         return _type;
       default:

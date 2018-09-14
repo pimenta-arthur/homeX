@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Add a new room</h2>
+<h2 mat-dialog-title>New room</h2>
 <mat-dialog-content>
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput #roomName type="text" maxlength="30" placeholder="Room's name" [(ngModel)]="value" name="roomName">
+      <input matInput #roomName type="text" maxlength="30" placeholder="Name" [(ngModel)]="value" name="roomName">
       <mat-hint align="end">{{roomName.value.length}} / 30</mat-hint>
     </mat-form-field>
   </form>

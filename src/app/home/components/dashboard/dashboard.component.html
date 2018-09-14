@@ -1,17 +1,25 @@
-<mat-grid-list [cols]="(isHandset$ | async) ? '1' : '4'" rowHeight="56px">
+<mat-grid-list [cols]="(isHandset$ | async) ? '1' : '4'" rowHeight="56px" [class.margin-grid]="!(isHandset$ | async)">
   <mat-grid-tile *ngFor="let room of rooms" [colspan]="1" [rowspan]="room.devices.length+1">
 
-    <mat-card class="room-card">
+    <mat-card class="room-card" [style.margin]="(isHandset$ | async) ? '0px' : '5px'">
       <mat-card-header>
-        <mat-card-title style="margin-top: 5px">
+        <mat-card-title style="margin-top: 5px" *ngIf="roomToHide!=room">
           {{room.name}}
         </mat-card-title>
 
-        <button mat-icon-button style="position: absolute;right: 0;top: 8px">
+        <mat-card-subtitle *ngIf="roomToHide!=room">{{room.devices.length}} devices</mat-card-subtitle>
+
+        <mat-form-field class="example-form-field" *ngIf="roomToHide==room">
+          <input matInput type="text" placeholder="Rename" [(ngModel)]="room.name" (focusout)="hideCardTitle()">
+          <button mat-button *ngIf="room.name" matSuffix mat-icon-button aria-label="Clear" (click)="hideCardTitle()">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-icon-button style="position: absolute;right: 0;top: 8px" (click)="hideCardTitle(room)">
           <mat-icon aria-label="more options icon">more_vert</mat-icon>
         </button>
 
-        <mat-card-subtitle>{{room.devices.length}} devices</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content [style.background]="room.color">
@@ -21,11 +29,13 @@
             <mat-divider></mat-divider>
             <mat-icon mat-list-icon *ngIf="device.type.icon">{{device.type.icon}}</mat-icon>
             <p mat-line>{{device.name}}</p>
-              <!-- device status display -->
-              <mat-slide-toggle *ngSwitchCase="'light'" color="primary"></mat-slide-toggle>
-              <p *ngSwitchCase="'door'">{{device.status}}</p>
-              <p *ngSwitchCase="'temperature'">14ºC</p>
-              <!-- end device status display -->
+            <!-- device status display -->
+            <mat-slide-toggle *ngSwitchCase="'light'" color="primary"></mat-slide-toggle>
+            <p *ngSwitchCase="'door'">{{device.status}}</p>
+            <p *ngSwitchCase="'temperature'">14ºC</p>
+            <p *ngSwitchCase="'occupancy'">No</p>
+            <mat-slide-toggle *ngSwitchCase="'power'" color="primary"></mat-slide-toggle>
+            <!-- end device status display -->
           </mat-list-item>
         </mat-list>
       </mat-card-content>
