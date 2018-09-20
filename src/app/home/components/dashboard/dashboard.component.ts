@@ -13,46 +13,40 @@ import { RoomsService } from "../../../rooms/shared/rooms.service";
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
   @ViewChild("name") nameField: ElementRef;
   roomToHide: IRoom;
-
-  editRoomName() {
-    this.nameField.nativeElement.focus();
-  }
-  hideCardTitle (room?)
-  {
-    this.roomToHide = room;
-  }
-
   rooms: IRoom[];
 
   devicesRoom1: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
     { name: "Power", type: DeviceType.propertiesOf(DeviceType.Power) },
-    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Open'},
+    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Open"},
     { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
   devicesRoom2: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
     { name: "Detection", type: DeviceType.propertiesOf(DeviceType.Occupancy) }
   ];
 
   devicesRoom3: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
     { name: "Outside Detection", type: DeviceType.propertiesOf(DeviceType.Occupancy) },
-    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
     { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
   devicesRoom4: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
     { name: "Outside Power", type: DeviceType.propertiesOf(DeviceType.Temperature) },
-    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Closed' },
+    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
     { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) },
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Side Door", type: DeviceType.propertiesOf(DeviceType.Door), status: 'Opened' },
+    { name: "Side Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Opened" },
     { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
   ];
 
@@ -64,7 +58,7 @@ export class DashboardComponent implements OnInit {
       devices: this.devicesRoom1
     },
     {
-      name: "Mika's Badroom",
+      name: "Mike's Bedroom",
       cols: 1,
       color: "#88EAD1",
       devices: this.devicesRoom2
@@ -82,16 +76,19 @@ export class DashboardComponent implements OnInit {
       devices: this.devicesRoom4
     },
     {
-      name: "Thor's Badroom",
+      name: "Thor's Bedroom",
       cols: 1,
       color: "#E4CDD2",
       devices: this.devicesRoom1
     }
   ];
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+  editRoomName() {
+    this.nameField.nativeElement.focus();
+  }
+  hideCardTitle (room?) {
+    this.roomToHide = room;
+  }
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -100,7 +97,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.roomsService.getRooms.subscribe(data => {
-      let rooms = this.roomsFixed.concat(data);
+      const rooms = this.roomsFixed.concat(data);
       this.rooms = rooms;
     });
   }

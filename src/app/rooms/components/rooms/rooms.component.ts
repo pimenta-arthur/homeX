@@ -25,7 +25,7 @@ export class RoomsComponent implements OnInit {
   }
 
   openDialog(): void {
-    //bla
+    // bla
   }
 
   removeRoom(room: IRoom): void {
