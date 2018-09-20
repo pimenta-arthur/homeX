@@ -60,31 +60,31 @@ export class DashboardComponent implements OnInit {
     {
       name: "Living Room",
       cols: 1,
-      color: "lightblue",
+      color: "#7CC1BC",
       devices: this.devicesRoom1
     },
     {
       name: "Mika's Badroom",
       cols: 1,
-      color: "lightgreen",
+      color: "#88EAD1",
       devices: this.devicesRoom2
     },
     {
       name: "Restroom",
       cols: 1,
-      color: "lightpink",
+      color: "#A5E0F4",
       devices: this.devicesRoom3
     },
     {
       name: "Kitchen",
       cols: 1,
-      color: "#DDBDF1",
+      color: "#C1C0DD",
       devices: this.devicesRoom4
     },
     {
       name: "Thor's Badroom",
       cols: 1,
-      color: "#dec7ce",
+      color: "#E4CDD2",
       devices: this.devicesRoom1
     }
   ];
