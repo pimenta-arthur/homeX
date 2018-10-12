@@ -3,7 +3,7 @@ from datetime import datetime
 
 # initialize firebaseapp
 config = {
-    "apiKey": "AIzaSyDXUyj09PlBOwxHT-VAl-lsSZNGeIza5MI",
+    "apiKey": "",
     "authDomain": "atg-home.firebaseapp.com",
     "databaseURL": "https://atg-home.firebaseio.com",
     "storageBucket": "atg-home.appspot.com"
