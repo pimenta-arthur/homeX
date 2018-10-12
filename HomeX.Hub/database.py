@@ -4,9 +4,9 @@ from datetime import datetime
 # initialize firebaseapp
 config = {
     "apiKey": "",
-    "authDomain": "atg-home.firebaseapp.com",
-    "databaseURL": "https://atg-home.firebaseio.com",
-    "storageBucket": "atg-home.appspot.com"
+    "authDomain": "",
+    "databaseURL": "",
+    "storageBucket": ""
 }
 
 firebase = pyrebase.initialize_app(config)
