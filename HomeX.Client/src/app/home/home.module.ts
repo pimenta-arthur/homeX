@@ -12,7 +12,8 @@ import {
   MatIconModule,
   MatButtonModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatMenuModule
 } from "@angular/material";
 import { LayoutModule } from "@angular/cdk/layout";
 import { FormsModule } from "@angular/forms";
@@ -30,7 +31,8 @@ import { FormsModule } from "@angular/forms";
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   declarations: [HomeComponent, HomeDialogFabComponent, DashboardComponent],
   entryComponents: [HomeDialogFabComponent],

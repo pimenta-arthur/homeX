@@ -16,8 +16,7 @@ export class DashboardComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
-  @ViewChild("name") nameField: ElementRef;
-  roomToHide: IRoom;
+  roomToRename: IRoom;
   rooms: IRoom[];
 
   devicesRoom1: IDevice[] = [
@@ -83,11 +82,9 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  editRoomName() {
-    this.nameField.nativeElement.focus();
-  }
-  hideCardTitle (room?) {
-    this.roomToHide = room;
+  // TODO: figure out how to force a focus on the input text field after call this method
+  editRoomName (room?) {
+    this.roomToRename = room;
   }
 
   constructor(
