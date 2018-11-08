@@ -8,11 +8,12 @@
   width: 100%;
   height: 100%;
   padding: 0;
+  border-bottom: lightgray 1.5px solid !important;
 }
 
 .room-card > mat-card-header {
   height: 56px;
-  background-color: ghostwhite;
+  background-color: #f8f8ffb3;
   // border: 1px solid;
   // opacity: .4;
 }

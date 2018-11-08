@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     {
       name: "Living Room",
       cols: 1,
-      color: "#7CC1BC",
+      color: "none",
       devices: this.devicesRoom1
     },
     {
