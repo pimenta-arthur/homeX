@@ -54,4 +54,8 @@ export namespace DeviceType {
         return _type;
     }
   }
+
+  export function typeNames() {
+    return ["light", "door", "temperature", "power", "occupancy"];
+  }
 }
