@@ -17,7 +17,7 @@
     <mat-selection-list role="list" #options>
       <mat-divider></mat-divider>
       <mat-list-option *ngFor="let name of deviceTypeNames" (focus)="selectDeviceOption(options, name)">
-        {{name}}
+        {{name | titlecase}}
       </mat-list-option>
       <mat-divider></mat-divider>
     </mat-selection-list>
