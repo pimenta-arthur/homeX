@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'over'">
-    <mat-toolbar color="primary" class="main-nav-toolbar">
+    <mat-toolbar class="main-nav-toolbar">
       Home
       <i class="fab fa-xing fa-lg" style="margin-left: 5px"></i>
     </mat-toolbar>
@@ -12,7 +12,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary" class="main-nav-toolbar" style="background-color:#285a98">
+    <mat-toolbar color="primary" class="main-nav-toolbar" style="background-color:white">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>

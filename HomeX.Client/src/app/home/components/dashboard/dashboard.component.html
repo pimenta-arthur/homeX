@@ -3,7 +3,7 @@
 
     <mat-card class="room-card" [style.margin]="(isHandset$ | async) ? '0px' : '5px'">
       <mat-card-header>
-        <mat-card-title style="margin-top: 5px" *ngIf="roomToRename!=room">
+        <mat-card-title style="margin-top: 5px; font-size: 15px" *ngIf="roomToRename!=room">
           {{room.name}}
         </mat-card-title>
 

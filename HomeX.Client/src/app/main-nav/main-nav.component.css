@@ -1,6 +1,6 @@
 .sidenav-container {
   height: 100%;
-  background-color: ghostwhite;
+  background-color: white;
 }
 
 .sidenav {
@@ -17,11 +17,12 @@
 }
 
 .main-nav-toolbar {
-  background-color: #5678f6;
+  background-color: white;
   height: 55px;
-  color: white;
+  color: gray;
   font-family: 'Open Sans 200', sans-serif;
   z-index: 9999;
+  border-bottom: lightgray 1px solid;
 }
 
 .main-nav-toolbar > 
@@ -30,3 +31,5 @@
   margin-right: 5px;
   background: none;
 }
+
+/* 285a98 */
