@@ -9,6 +9,8 @@ import { DeviceType } from "../../shared/device-type";
 })
 export class DeviceDialogFabComponent implements OnInit {
   isLinear = true;
+  isEditable = true;
+  secondsToPermitJoining = 10;
   firstFormGroup: FormGroup;
   newDeviceName = "";
   newDeviceType = "";
@@ -16,7 +18,7 @@ export class DeviceDialogFabComponent implements OnInit {
 
   color = "primary";
   mode = "determinate";
-  value = 50;
+  value = 0;
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -31,23 +33,37 @@ export class DeviceDialogFabComponent implements OnInit {
   selectDeviceOption(options, selectedOption) {
     this.newDeviceType = selectedOption;
     options.deselectAll();
-    console.log(this.newDeviceType);
   }
 
-  startCountdown(seconds) {
-    let counter = seconds;
+  completeFirstStep(firstStep, stepper) {
+    firstStep.completed = true;
+    stepper.next();
+  }
+
+  completeSecondStep(secondStep, thirdStep, stepper) {
+    secondStep.completed = true;
+    this.isEditable = false;
+    stepper.next();
+
+    const seconds = this.secondsToPermitJoining * 200;
+    let counter = 1;
+
 
     const interval = setInterval(() => {
-      console.log(counter);
-      this.value = counter;
-      counter--;
+      this.value = (counter / seconds) * 100;
 
-      if (counter < 0 ) {
+      counter++;
+
+      if (counter > seconds) {
         // The code here will run when
-        // the timer has reached zero.
+        // the timer has reached seconds.
         clearInterval(interval);
+
+        thirdStep.completed = true;
+        stepper.next();
+
         console.log("Ding!");
       }
-    }, 1000);
+    }, 5);
   }
 }
