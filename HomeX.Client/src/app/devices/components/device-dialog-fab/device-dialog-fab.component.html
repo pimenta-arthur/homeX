@@ -1,7 +1,7 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [completed]="false" [editable]="isEditable" #firstStep>
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out the device's name</ng-template>
+      <ng-template matStepLabel>Name</ng-template>
       <mat-form-field>
         <input matInput #filledName placeholder="Ex: Outside Light" maxlength="30" [(ngModel)]="deviceName" name="deviceName" 
         formControlName="firstCtrl" required>
@@ -14,7 +14,7 @@
   </mat-step>
 
   <mat-step [completed]="false" [editable]="isEditable" #secondStep>
-    <ng-template matStepLabel>Select the device</ng-template>
+    <ng-template matStepLabel>Device type</ng-template>
     <mat-selection-list role="list" #options>
       <mat-divider></mat-divider>
       <mat-list-option *ngFor="let name of deviceOptionNames" (focus)="selectDeviceOption(options, name)">
@@ -33,8 +33,9 @@
   </mat-step>
 
   <mat-step [completed]="false" [editable]="false" #thirdStep>
-    <ng-template matStepLabel>Find device</ng-template>
-    Press the sensor button
+    <ng-template matStepLabel>Add device</ng-template>
+      <p>Searching...</p>
+      <span>Press the sensor button</span>
     <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar>
   </mat-step>
 
