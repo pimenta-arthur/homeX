@@ -8,12 +8,15 @@ import { DeviceType } from "../../shared/device-type";
   styleUrls: ["./device-dialog-fab.component.scss"]
 })
 export class DeviceDialogFabComponent implements OnInit {
-  deviceName = "";
-  selectedDeviceOption = "";
   isLinear = true;
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  deviceTypeNames: string[];
+  newDeviceName = "";
+  newDeviceType = "";
+  deviceOptionNames: string[];
+
+  color = "primary";
+  mode = "determinate";
+  value = 50;
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -22,13 +25,29 @@ export class DeviceDialogFabComponent implements OnInit {
       firstCtrl: ["", Validators.required]
     });
 
-    this.deviceTypeNames = DeviceType.typeNames();
+    this.deviceOptionNames = DeviceType.typeNames();
   }
 
-  selectDeviceOption(allOptions, selectedOption) {
-    this.selectedDeviceOption = selectedOption;
-    allOptions.deselectAll();
+  selectDeviceOption(options, selectedOption) {
+    this.newDeviceType = selectedOption;
+    options.deselectAll();
+    console.log(this.newDeviceType);
+  }
 
-    console.log(this.selectedDeviceOption);
+  startCountdown(seconds) {
+    let counter = seconds;
+
+    const interval = setInterval(() => {
+      console.log(counter);
+      this.value = counter;
+      counter--;
+
+      if (counter < 0 ) {
+        // The code here will run when
+        // the timer has reached zero.
+        clearInterval(interval);
+        console.log("Ding!");
+      }
+    }, 1000);
   }
 }
