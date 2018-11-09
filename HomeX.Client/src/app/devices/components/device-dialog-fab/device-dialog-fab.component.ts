@@ -10,14 +10,11 @@ import { DeviceType } from "../../shared/device-type";
 export class DeviceDialogFabComponent implements OnInit {
   isLinear = true;
   isEditable = true;
-  secondsToPermitJoining = 10;
+  secondsToPermitJoining = 4;
   firstFormGroup: FormGroup;
   newDeviceName = "";
   newDeviceType = "";
   deviceOptionNames: string[];
-
-  color = "primary";
-  mode = "determinate";
   value = 0;
 
   constructor(private _formBuilder: FormBuilder) {}
@@ -40,7 +37,7 @@ export class DeviceDialogFabComponent implements OnInit {
     stepper.next();
   }
 
-  completeSecondStep(secondStep, thirdStep, stepper) {
+  completeSecondStep(secondStep, thirdStep, fourthStep, stepper) {
     secondStep.completed = true;
     this.isEditable = false;
     stepper.next();
@@ -61,6 +58,9 @@ export class DeviceDialogFabComponent implements OnInit {
 
         thirdStep.completed = true;
         stepper.next();
+
+        // fourthStep.errorMessage = "bad";
+        // fourthStep.hasError = true;
 
         console.log("Ding!");
       }

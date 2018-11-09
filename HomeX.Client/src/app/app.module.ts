@@ -4,13 +4,14 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MainNavComponent } from "./main-nav/main-nav.component";
 import { LayoutModule } from "@angular/cdk/layout";
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatBadgeModule } from "@angular/material";
+import { MatBadgeModule } from "@angular/material";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { AppRoutingModule } from "./app.routing";
 import { RoomsModule } from "./rooms/rooms.module";
 import { DevicesModule } from "./devices/devices.module";
 import { HomeModule } from "./home/home.module";
 import { AppMaterialModule } from "./app.material.module";
+import { MAT_STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 
 @NgModule({
   declarations: [AppComponent, MainNavComponent, NotFoundComponent],
@@ -27,7 +28,10 @@ import { AppMaterialModule } from "./app.material.module";
   ],
   entryComponents: [],
   providers: [
-    // { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+    {
+      provide: MAT_STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true }
+    }
   ],
   bootstrap: [AppComponent]
 })

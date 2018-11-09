@@ -26,7 +26,7 @@
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button 
         [disabled]="!options.selectedOptions.selected.length > 0" 
-        (click)="completeSecondStep(secondStep, thirdStep, stepper)">
+        (click)="completeSecondStep(secondStep, thirdStep, fourthStep, stepper)">
         Next
       </button>
     </div>
@@ -39,7 +39,7 @@
     <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar>
   </mat-step>
 
-  <mat-step>
+  <mat-step #fourthStep>
     <ng-template matStepLabel>Done</ng-template>
       No device found.
     <!-- You are now done. -->
