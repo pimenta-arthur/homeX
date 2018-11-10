@@ -55,7 +55,14 @@ export namespace DeviceType {
     }
   }
 
-  export function typeNames() {
-    return ["light", "door", "temperature", "power", "occupancy"];
+  export function getTypes() {
+    const devices = [
+      propertiesOf(DeviceType.Light),
+      propertiesOf(DeviceType.Door),
+      propertiesOf(DeviceType.Occupancy),
+      propertiesOf(DeviceType.Power),
+      propertiesOf(DeviceType.Temperature)
+    ];
+    return devices;
   }
 }

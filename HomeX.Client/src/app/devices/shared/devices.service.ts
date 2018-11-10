@@ -5,14 +5,14 @@ import { IDevice } from "./device";
 export class DevicesService {
   constructor() {}
 
-  private _devices: IDevice[];
+  private _devices: IDevice[] = new Array<IDevice>();
 
   addDevice(device: IDevice): void {
     this._devices.push(device);
   }
 
   removeDevice(device: IDevice): void {
-    var index = this._devices.indexOf(device);
+    let index = this._devices.indexOf(device);
     if (index != -1) {
       this._devices.splice(index, 1);
     }

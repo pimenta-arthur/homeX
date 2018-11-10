@@ -3,6 +3,8 @@ import { IRoom } from "../../../rooms/shared/room";
 import { RoomsService } from "../../../rooms/shared/rooms.service";
 import { DeviceDialogFabComponent } from "../device-dialog-fab/device-dialog-fab.component";
 import { MatDialog } from "@angular/material";
+import { DevicesService } from "../../shared/devices.service";
+import { IDevice } from "../../shared/device";
 
 @Component({
   selector: "app-devices",
@@ -12,7 +14,11 @@ import { MatDialog } from "@angular/material";
 export class DevicesComponent implements OnInit {
   rooms: IRoom[];
 
-  constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
+  constructor(
+    private roomsService: RoomsService,
+    public dialog: MatDialog,
+    private devicesService: DevicesService
+  ) {}
 
   ngOnInit() {
     // this.rooms = this.roomsService.getRooms();
@@ -28,6 +34,10 @@ export class DevicesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
+      const device: IDevice = result;
+      if (device) {
+        this.devicesService.addDevice(device);
+      }
     });
   }
 }

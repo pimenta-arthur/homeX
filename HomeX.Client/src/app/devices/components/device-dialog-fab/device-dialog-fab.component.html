@@ -1,50 +1,63 @@
-<mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step [completed]="false" [editable]="isEditable" #firstStep>
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Name</ng-template>
-      <mat-form-field>
-        <input matInput #filledName placeholder="Ex: Outside Light" maxlength="30" [(ngModel)]="deviceName" name="deviceName" 
-        formControlName="firstCtrl" required>
-        <mat-hint align="end">{{filledName.value.length}} / 30</mat-hint>
-      </mat-form-field>
+<mat-dialog-content>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [completed]="false" [editable]="isEditable" #firstStep>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Name</ng-template>
+        <mat-form-field>
+          <input matInput #filledName placeholder="Ex: Outside Light" maxlength="30" [(ngModel)]="newDeviceName" name="deviceName" 
+          formControlName="firstCtrl" required>
+          <mat-hint align="end">{{filledName.value.length}} / 30</mat-hint>
+        </mat-form-field>
+        <div>
+          <button mat-button [disabled]="!filledName.value.length > 0" (click)="completeFirstStep(firstStep, stepper)">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [completed]="false" [editable]="isEditable" #secondStep>
+      <ng-template matStepLabel>Device type</ng-template>
+      <mat-selection-list role="list" #options>
+        <mat-divider></mat-divider>
+        <mat-list-option *ngFor="let type of deviceOptions" (focus)="selectDeviceOption(type, options)">
+          {{type.name | titlecase}}
+        </mat-list-option>
+      </mat-selection-list>
       <div>
-        <button mat-button [disabled]="!filledName.value.length > 0" (click)="completeFirstStep(firstStep, stepper)">Next</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button 
+          [disabled]="!options.selectedOptions.selected.length > 0" 
+          (click)="completeSecondStep(secondStep, thirdStep, fourthStep, stepper)">
+          Next
+        </button>
       </div>
-    </form>
-  </mat-step>
+    </mat-step>
 
-  <mat-step [completed]="false" [editable]="isEditable" #secondStep>
-    <ng-template matStepLabel>Device type</ng-template>
-    <mat-selection-list role="list" #options>
-      <mat-divider></mat-divider>
-      <mat-list-option *ngFor="let name of deviceOptionNames" (focus)="selectDeviceOption(options, name)">
-        {{name | titlecase}}
-      </mat-list-option>
-      <mat-divider></mat-divider>
-    </mat-selection-list>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button 
-        [disabled]="!options.selectedOptions.selected.length > 0" 
-        (click)="completeSecondStep(secondStep, thirdStep, fourthStep, stepper)">
-        Next
-      </button>
-    </div>
-  </mat-step>
+    <mat-step [completed]="false" [editable]="false" #thirdStep>
+      <ng-template matStepLabel>Find device</ng-template>
+        <p>Searching...</p>
+        <span>Press the sensor button</span>
+      <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar>
+    </mat-step>
 
-  <mat-step [completed]="false" [editable]="false" #thirdStep>
-    <ng-template matStepLabel>Add device</ng-template>
-      <p>Searching...</p>
-      <span>Press the sensor button</span>
-    <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar>
-  </mat-step>
+    <mat-step [editable]="false" #fourthStep>
+      <ng-template matStepLabel>{{labelFourthStep}}</ng-template>
+        <span *ngIf="!isDeviceFound">
+          Device not found
+        </span>
 
-  <mat-step #fourthStep>
-    <ng-template matStepLabel>Done</ng-template>
-      No device found.
-    <!-- You are now done. -->
-    <div>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+        <div *ngIf="isDeviceFound" style="text-align:center">
+            <p>New device found</p>
+            <mat-divider></mat-divider>
+            <p>{{newDevice.name | titlecase}}</p>
+            <p><mat-icon *ngIf="newDevice.type.icon">{{newDevice.type.icon}}</mat-icon></p>
+            <mat-divider></mat-divider>
+        </div>
+      <!-- You are now done. -->
+      <div>
+        <button mat-button *ngIf="isDeviceFound" mat-button [mat-dialog-close]="newDevice">Confirm</button>
+        <button mat-button (click)="stepper.reset()" *ngIf="!isDeviceFound">Reset</button>
+        <button mat-button mat-dialog-close>Cancel</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</mat-dialog-content>

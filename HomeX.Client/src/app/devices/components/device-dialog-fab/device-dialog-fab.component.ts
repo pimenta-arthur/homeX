@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DeviceType } from "../../shared/device-type";
+import { DeviceType, IDeviceType } from "../../shared/device-type";
+import { IDevice } from "../../shared/device";
 
 @Component({
   selector: "app-device-dialog-fab",
@@ -10,12 +11,16 @@ import { DeviceType } from "../../shared/device-type";
 export class DeviceDialogFabComponent implements OnInit {
   isLinear = true;
   isEditable = true;
-  secondsToPermitJoining = 4;
+  isDeviceFound = true;
+  secondsToPermitJoining = 1;
   firstFormGroup: FormGroup;
   newDeviceName = "";
-  newDeviceType = "";
-  deviceOptionNames: string[];
+  newDeviceType: IDeviceType = {name: "", icon: ""};
+  newDevice: IDevice = {name: this.newDeviceName, type: this.newDeviceType};
+  deviceOptions: IDeviceType[];
   value = 0;
+  fourthStepText = "Device not found";
+  labelFourthStep = "";
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -24,10 +29,10 @@ export class DeviceDialogFabComponent implements OnInit {
       firstCtrl: ["", Validators.required]
     });
 
-    this.deviceOptionNames = DeviceType.typeNames();
+    this.deviceOptions = DeviceType.getTypes();
   }
 
-  selectDeviceOption(options, selectedOption) {
+  selectDeviceOption(selectedOption, options) {
     this.newDeviceType = selectedOption;
     options.deselectAll();
   }
@@ -45,7 +50,6 @@ export class DeviceDialogFabComponent implements OnInit {
     const seconds = this.secondsToPermitJoining * 200;
     let counter = 1;
 
-
     const interval = setInterval(() => {
       this.value = (counter / seconds) * 100;
 
@@ -57,13 +61,32 @@ export class DeviceDialogFabComponent implements OnInit {
         clearInterval(interval);
 
         thirdStep.completed = true;
-        stepper.next();
 
+        // check if device was found
+        this.checkIfWasFound();
+
+        // move to fourth step
+        stepper.next();
         // fourthStep.errorMessage = "bad";
         // fourthStep.hasError = true;
-
         console.log("Ding!");
       }
     }, 5);
+  }
+
+  checkIfWasFound() {
+    if (true) {
+      this.newDevice = {
+        name: this.newDeviceName,
+        type: this.newDeviceType
+      };
+
+      this.labelFourthStep = "Congratulations";
+      this.isDeviceFound = true;
+    } else {
+      this.labelFourthStep = "Ops!";
+      this.newDevice = null;
+      this.isDeviceFound = false;
+    }
   }
 }
