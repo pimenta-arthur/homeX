@@ -11,7 +11,8 @@ import {
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MatDialogModule,
-  MatIconModule
+  MatIconModule,
+  MatTableModule
 } from "@angular/material";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -28,7 +29,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   declarations: [DevicesComponent, DeviceDialogFabComponent],
   entryComponents: [DeviceDialogFabComponent],
