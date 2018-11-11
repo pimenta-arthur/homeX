@@ -27,3 +27,21 @@
   // font-size: 20x!important;
   // transform: scale(.9)
 }
+
+.circled-btn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: solid 1px lightgray;
+}
+
+.circle:hover{
+  border: solid 3px lightgray;
+}

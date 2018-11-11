@@ -18,35 +18,74 @@ export class DashboardComponent implements OnInit {
     .pipe(map(result => result.matches));
   roomToRename: IRoom;
   rooms: IRoom[];
+  roomColors: string[];
 
   devicesRoom1: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
     { name: "Power", type: DeviceType.propertiesOf(DeviceType.Power) },
-    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Open"},
-    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
+    {
+      name: "Front Door",
+      type: DeviceType.propertiesOf(DeviceType.Door),
+      status: "Open"
+    },
+    {
+      name: "Temperature",
+      type: DeviceType.propertiesOf(DeviceType.Temperature)
+    }
   ];
 
   devicesRoom2: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Front Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
+    {
+      name: "Front Door",
+      type: DeviceType.propertiesOf(DeviceType.Door),
+      status: "Closed"
+    },
     { name: "Detection", type: DeviceType.propertiesOf(DeviceType.Occupancy) }
   ];
 
   devicesRoom3: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Outside Detection", type: DeviceType.propertiesOf(DeviceType.Occupancy) },
-    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
-    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
+    {
+      name: "Outside Detection",
+      type: DeviceType.propertiesOf(DeviceType.Occupancy)
+    },
+    {
+      name: "Back Door",
+      type: DeviceType.propertiesOf(DeviceType.Door),
+      status: "Closed"
+    },
+    {
+      name: "Temperature",
+      type: DeviceType.propertiesOf(DeviceType.Temperature)
+    }
   ];
 
   devicesRoom4: IDevice[] = [
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Outside Power", type: DeviceType.propertiesOf(DeviceType.Temperature) },
-    { name: "Back Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Closed" },
-    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) },
+    {
+      name: "Outside Power",
+      type: DeviceType.propertiesOf(DeviceType.Temperature)
+    },
+    {
+      name: "Back Door",
+      type: DeviceType.propertiesOf(DeviceType.Door),
+      status: "Closed"
+    },
+    {
+      name: "Temperature",
+      type: DeviceType.propertiesOf(DeviceType.Temperature)
+    },
     { name: "Outside Light", type: DeviceType.propertiesOf(DeviceType.Light) },
-    { name: "Side Door", type: DeviceType.propertiesOf(DeviceType.Door), status: "Opened" },
-    { name: "Temperature", type: DeviceType.propertiesOf(DeviceType.Temperature) }
+    {
+      name: "Side Door",
+      type: DeviceType.propertiesOf(DeviceType.Door),
+      status: "Opened"
+    },
+    {
+      name: "Temperature",
+      type: DeviceType.propertiesOf(DeviceType.Temperature)
+    }
   ];
 
   roomsFixed: IRoom[] = [
@@ -82,14 +121,9 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  // TODO: figure out how to force a focus on the input text field after call this method
-  editRoomName (room?) {
-    this.roomToRename = room;
-  }
-
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private roomsService: RoomsService,
+    private roomsService: RoomsService
   ) {}
 
   ngOnInit() {
@@ -97,5 +131,33 @@ export class DashboardComponent implements OnInit {
       const rooms = this.roomsFixed.concat(data);
       this.rooms = rooms;
     });
+
+    // TODO: retrieve the colors from the database
+    this.roomColors = [
+      "None",
+      "#C1C0DD",
+      "#A5E0F4",
+      "#88EAD1",
+      "#e59088",
+      "#ffef87",
+      "#f0ba5d",
+      "#d3f199",
+      "#b6f7ea",
+      "#d1eff6",
+      "#b2cdf6",
+      "#d0b5f6",
+      "#f1d1e6",
+      "#e2c8ac",
+      "#e8eaed"
+    ];
+  }
+
+  // TODO: figure out how to force a focus on the input text field after call this method
+  editRoomName(room?) {
+    this.roomToRename = room;
+  }
+
+  changeRoomColor(color: string, room: IRoom) {
+    room.color = color;
   }
 }

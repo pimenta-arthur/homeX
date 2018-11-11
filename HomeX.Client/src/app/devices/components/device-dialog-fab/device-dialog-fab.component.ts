@@ -19,8 +19,7 @@ export class DeviceDialogFabComponent implements OnInit {
   newDevice: IDevice = {name: this.newDeviceName, type: this.newDeviceType};
   deviceOptions: IDeviceType[];
   value = 0;
-  fourthStepText = "Device not found";
-  labelFourthStep = "";
+  labelFourthStep = "Done";
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -67,8 +66,7 @@ export class DeviceDialogFabComponent implements OnInit {
 
         // move to fourth step
         stepper.next();
-        // fourthStep.errorMessage = "bad";
-        // fourthStep.hasError = true;
+
         console.log("Ding!");
       }
     }, 5);

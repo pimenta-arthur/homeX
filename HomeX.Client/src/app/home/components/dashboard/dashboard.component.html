@@ -27,6 +27,15 @@
           <button mat-menu-item (click)="editRoomName(room)">
             <span>Rename</span>
           </button>
+          <button mat-menu-item [matMenuTriggerFor]="color">Color</button>
+        </mat-menu>
+
+        <mat-menu #color="matMenu">
+          <mat-grid-list cols="3" rowHeight="40px">
+            <mat-grid-tile *ngFor="let color of roomColors">
+              <span class="circle" [style.background]="color" (click)="changeRoomColor(color, room)"></span>
+            </mat-grid-tile>
+          </mat-grid-list>
         </mat-menu>
 
       </mat-card-header>
