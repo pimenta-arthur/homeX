@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DeviceType, IDeviceType } from "../../shared/device-type";
-import { IDevice } from "../../shared/device";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DeviceType, IDeviceType } from '../../shared/device-type';
+import { IDevice } from '../../shared/device';
 
 @Component({
-  selector: "app-device-dialog-fab",
-  templateUrl: "./device-dialog-fab.component.html",
-  styleUrls: ["./device-dialog-fab.component.scss"]
+  selector: 'app-device-dialog-fab',
+  templateUrl: './device-dialog-fab.component.html',
+  styleUrls: ['./device-dialog-fab.component.scss']
 })
 export class DeviceDialogFabComponent implements OnInit {
   isLinear = true;
@@ -14,18 +14,18 @@ export class DeviceDialogFabComponent implements OnInit {
   isDeviceFound = true;
   secondsToPermitJoining = 1;
   firstFormGroup: FormGroup;
-  newDeviceName = "";
-  newDeviceType: IDeviceType = {name: "", icon: ""};
+  newDeviceName = '';
+  newDeviceType: IDeviceType = {name: '', icon: ''};
   newDevice: IDevice = {name: this.newDeviceName, type: this.newDeviceType};
   deviceOptions: IDeviceType[];
   value = 0;
-  labelFourthStep = "Done";
+  labelFourthStep = 'Done';
 
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ["", Validators.required]
+      firstCtrl: ['', Validators.required]
     });
 
     this.deviceOptions = DeviceType.getTypes();
@@ -67,7 +67,7 @@ export class DeviceDialogFabComponent implements OnInit {
         // move to fourth step
         stepper.next();
 
-        console.log("Ding!");
+        console.log('Ding!');
       }
     }, 5);
   }
@@ -79,10 +79,10 @@ export class DeviceDialogFabComponent implements OnInit {
         type: this.newDeviceType
       };
 
-      this.labelFourthStep = "Congratulations";
+      this.labelFourthStep = 'Congratulations';
       this.isDeviceFound = true;
     } else {
-      this.labelFourthStep = "Ops!";
+      this.labelFourthStep = 'Ops!';
       this.newDevice = null;
       this.isDeviceFound = false;
     }

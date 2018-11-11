@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { IRoom } from "./room";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { IRoom } from './room';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class RoomsService {
@@ -13,7 +13,7 @@ export class RoomsService {
   }
 
   removeRoom(room: IRoom): void {
-    var index = this._rooms.getValue().indexOf(room);
+    const index = this._rooms.getValue().indexOf(room);
     if (index != -1) {
       this._rooms.getValue().splice(index, 1);
     }

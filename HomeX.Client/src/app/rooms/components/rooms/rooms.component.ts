@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { RoomsService } from "../../shared/rooms.service";
-import { IRoom } from "../../shared/room";
-import { IDevice } from "../../../devices/shared/device";
-import { MatTableDataSource } from "@angular/material";
+import { Component, OnInit } from '@angular/core';
+import { RoomsService } from '../../shared/rooms.service';
+import { IRoom } from '../../shared/room';
+import { IDevice } from '../../../devices/shared/device';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: "app-rooms",
-  templateUrl: "./rooms.component.html",
-  styleUrls: ["./rooms.component.scss"]
+  selector: 'app-rooms',
+  templateUrl: './rooms.component.html',
+  styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent implements OnInit {
   rooms: IRoom[];
-  displayedColumns: string[] = ["rooms", "devices"];
+  displayedColumns: string[] = ['rooms', 'devices'];
   dataSource: MatTableDataSource<IRoom>;
 
   constructor(private roomsService: RoomsService) {}

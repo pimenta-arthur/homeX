@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { IDevice } from "./device";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { IDevice } from './device';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DevicesService {
@@ -13,7 +13,7 @@ export class DevicesService {
   }
 
   removeDevice(device: IDevice): void {
-    let index = this._devices.getValue().indexOf(device);
+    const index = this._devices.getValue().indexOf(device);
     if (index != -1) {
       this._devices.getValue().splice(index, 1);
     }
