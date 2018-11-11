@@ -1,8 +1,8 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { HomeComponent } from "./components/home/home.component";
-import { HomeDialogFabComponent } from "./components/home-dialog-fab/home-dialog-fab.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './components/home/home.component';
+import { HomeDialogFabComponent } from './components/home-dialog-fab/home-dialog-fab.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {
   MatListModule,
   MatCardModule,
@@ -14,9 +14,9 @@ import {
   MatDialogModule,
   MatInputModule,
   MatMenuModule
-} from "@angular/material";
-import { LayoutModule } from "@angular/cdk/layout";
-import { FormsModule } from "@angular/forms";
+} from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

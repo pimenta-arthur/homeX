@@ -1,4 +1,4 @@
-import { IDevice } from "../../devices/shared/device";
+import { IDevice } from '../../devices/shared/device';
 
 export interface IRoom {
   color: string;
