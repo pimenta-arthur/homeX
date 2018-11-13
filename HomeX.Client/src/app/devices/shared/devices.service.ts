@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { IDevice } from './device';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable()
 export class DevicesService {
-  constructor() {}
+  constructor(db: AngularFireDatabase) {
+    const bla = db;
+    console.log(bla);
+  }
 
   private _devices: BehaviorSubject<IDevice[]> = new BehaviorSubject<IDevice[]>([]);
 
@@ -14,7 +18,7 @@ export class DevicesService {
 
   removeDevice(device: IDevice): void {
     const index = this._devices.getValue().indexOf(device);
-    if (index != -1) {
+    if (index !== -1) {
       this._devices.getValue().splice(index, 1);
     }
   }
