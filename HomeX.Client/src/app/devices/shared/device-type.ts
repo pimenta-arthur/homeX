@@ -18,38 +18,38 @@ export namespace DeviceType {
     switch (type) {
       case DeviceType.Light:
         _type = {
-          name: "light",
-          icon: "wb_incandescent"
+          name: 'light',
+          icon: 'wb_incandescent'
         };
         return _type;
       case DeviceType.Door:
         _type = {
-          name: "door",
-          icon: "meeting_room"
+          name: 'door',
+          icon: 'meeting_room'
         };
         return _type;
       case DeviceType.Temperature:
         _type = {
-          name: "temperature",
-          icon: "opacity"
+          name: 'temperature',
+          icon: 'opacity'
         };
         return _type;
       case DeviceType.Power:
         _type = {
-          name: "power",
-          icon: "power"
+          name: 'power',
+          icon: 'power'
         };
         return _type;
       case DeviceType.Occupancy:
         _type = {
-          name: "occupancy",
-          icon: "transfer_within_a_station"
+          name: 'occupancy',
+          icon: 'transfer_within_a_station'
         };
         return _type;
       default:
         _type = {
-          name: "",
-          icon: ""
+          name: '',
+          icon: ''
         };
         return _type;
     }
