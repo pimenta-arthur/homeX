@@ -31,4 +31,8 @@ export class MainNavComponent implements OnInit {
   logout() {
     this.auth.signOut();
   }
+
+  login() {
+    this.auth.signInWithGoogle();
+  }
 }

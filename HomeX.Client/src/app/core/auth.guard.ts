@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -15,8 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthGuard implements CanActivate {
   constructor(
     private auth: AuthService,
-    private router: Router,
-    private afAuth: AngularFireAuth
+    private router: Router
   ) {}
 
   canActivate(
@@ -24,11 +23,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.auth.authenticated) {
-      console.log('User signed in');
+      // console.log('User signed in');
       return true;
     }
-
-    console.log('User not signed in');
+    // console.log('User not signed in');
     // this.router.navigateByUrl('/login');
     // this.auth.signInWithGoogle();
     return false;

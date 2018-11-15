@@ -25,11 +25,30 @@
   border-bottom: lightgray 1px solid;
 }
 
-.main-nav-toolbar > 
-.button-row button,
+.main-nav-toolbar > .button-row button,
 .button-row a {
   margin-right: 5px;
   background: none;
 }
 
-/* 285a98 */
+.login-card {
+  text-align: center;
+  margin: 0 auto;
+  width: 200px;
+  /* height: 300px; */
+  margin-top: 100px;
+  background-color: #faf9fe;
+  position: relative;
+}
+
+#atg-logo {
+  width: 18px;
+  height: 20px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+#google-btn {
+  cursor: pointer;
+}

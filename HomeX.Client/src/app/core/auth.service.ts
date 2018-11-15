@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   authState: firebase.User = null;
-  user = null;
+  // user = null;
   isAuthenticated = false;
 
   constructor(
@@ -18,15 +18,29 @@ export class AuthService {
     private db: AngularFireDatabase,
     private router: Router
   ) {
+    // Using a redirect.
+    // this.afAuth.auth.getRedirectResult().then(function(result) {
+    //   if (result.credential) {
+    //     // This gives you a Google Access Token.
+    //     const token = result.credential;
+    //   }
+    //   const user = result.user;
+    // });
+
     this.afAuth.authState.subscribe(user => {
       console.log(user);
       if (user !== null) {
         this.authState = user;
         this.isAuthenticated = true;
         this.router.navigateByUrl('/home');
+
+        console.log('User signed in');
       } else {
         this.isAuthenticated = false;
-        this.signInWithGoogle();
+
+        console.log('User not signed in');
+        // this.router.navigateByUrl('/login');
+        // this.signInWithGoogle();
       }
     });
   }
@@ -41,7 +55,7 @@ export class AuthService {
 
   signInWithGoogle() {
     const provider = new auth.GoogleAuthProvider();
-    this.afAuth.auth.signInWithRedirect(provider).then(user => {
+    this.afAuth.auth.signInWithPopup(provider).then(user => {
       console.log('Signed in successfully');
     });
   }

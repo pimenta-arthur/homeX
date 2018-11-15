@@ -5,7 +5,6 @@ import { RoomsComponent } from './rooms/components/rooms/rooms.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DevicesComponent } from './devices/components/devices/devices.component';
 import { AuthGuard } from './core/auth.guard';
-import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -28,10 +27,6 @@ const routes: Routes = [
     path: 'devices',
     component: DevicesComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   },
   {
     path: '404',

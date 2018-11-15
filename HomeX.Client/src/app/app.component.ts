@@ -11,7 +11,7 @@ import { AuthService } from './core/auth.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void { }
 }

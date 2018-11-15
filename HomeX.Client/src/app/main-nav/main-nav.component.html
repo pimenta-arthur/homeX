@@ -55,3 +55,17 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- login component here -->
+<mat-card class="login-card" *ngIf="!auth.isAuthenticated">
+  <p style="color: #808080; font-size: 16px">
+    Home
+    <i class="fab fa-xing fa-lg"></i>
+  </p>
+
+  <p>
+    <img (click)="login()" src="../../assets/btn_google_signin_light_normal_web.png" alt="google-login" id="google-btn">
+  </p>
+
+  <img src="../../assets/atg-logo.png" alt="atg-logo" id="atg-logo">
+</mat-card>
