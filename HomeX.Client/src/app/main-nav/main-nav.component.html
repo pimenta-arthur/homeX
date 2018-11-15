@@ -45,7 +45,7 @@
           </mat-list-item>
         </mat-list>
 
-        <button mat-menu-item style="margin-top: 8px">Profile</button>
+        <button mat-menu-item style="margin-top: 8px" routerLink="profile">Profile</button>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </mat-toolbar>
@@ -63,9 +63,20 @@
     <i class="fab fa-xing fa-lg"></i>
   </p>
 
-  <p>
-    <img (click)="login()" src="../../assets/btn_google_signin_light_normal_web.png" alt="google-login" id="google-btn">
-  </p>
+  <form>
+    <mat-form-field appearance="outline" class="login-form-field" style="margin-bottom: -20px" [color]="red">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="login-form-field" color="accent">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>  
+  </form>
+
+  <img (click)="login()" src="../../assets/btn_google_signin_light_normal_web.png" alt="google-login" id="google-btn">
 
   <img src="../../assets/atg-logo.png" alt="atg-logo" id="atg-logo">
 </mat-card>

@@ -23,10 +23,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.auth.authenticated) {
-      // console.log('User signed in');
       return true;
     }
-    // console.log('User not signed in');
     // this.router.navigateByUrl('/login');
     // this.auth.signInWithGoogle();
     return false;

@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
-import { DevicesComponent } from "./components/devices/devices.component";
-import { DevicesService } from "./shared/devices.service";
-import { DeviceDialogFabComponent } from "./components/device-dialog-fab/device-dialog-fab.component";
+import { NgModule } from '@angular/core';
+import { DevicesComponent } from './components/devices/devices.component';
+import { DevicesService } from './shared/devices.service';
+import { DeviceDialogFabComponent } from './components/device-dialog-fab/device-dialog-fab.component';
 import {
   MatButtonModule,
   MatStepperModule,
@@ -13,9 +13,9 @@ import {
   MatDialogModule,
   MatIconModule,
   MatTableModule
-} from "@angular/material";
-import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule } from "@angular/forms";
+} from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -34,6 +34,6 @@ import { ReactiveFormsModule } from "@angular/forms";
   ],
   declarations: [DevicesComponent, DeviceDialogFabComponent],
   entryComponents: [DeviceDialogFabComponent],
-  providers: [DevicesService]
+  providers: []
 })
 export class DevicesModule {}

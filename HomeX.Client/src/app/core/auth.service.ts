@@ -3,35 +3,30 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { Observable } from 'rxjs';
+import { DevicesService } from '../devices/shared/devices.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   authState: firebase.User = null;
-  // user = null;
+  user: firebase.User = null;
   isAuthenticated = false;
+  userHub: string;
 
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
-    private router: Router
+    private router: Router,
+    // private devicesService: DevicesService
   ) {
-    // Using a redirect.
-    // this.afAuth.auth.getRedirectResult().then(function(result) {
-    //   if (result.credential) {
-    //     // This gives you a Google Access Token.
-    //     const token = result.credential;
-    //   }
-    //   const user = result.user;
-    // });
-
     this.afAuth.authState.subscribe(user => {
       console.log(user);
       if (user !== null) {
         this.authState = user;
+        this.user = user;
         this.isAuthenticated = true;
+        this.userHub = this.currentUserHub;
         this.router.navigateByUrl('/home');
 
         console.log('User signed in');
@@ -39,8 +34,6 @@ export class AuthService {
         this.isAuthenticated = false;
 
         console.log('User not signed in');
-        // this.router.navigateByUrl('/login');
-        // this.signInWithGoogle();
       }
     });
   }
@@ -51,6 +44,16 @@ export class AuthService {
 
   get currentUser() {
     return this.authenticated ? this.authState : null;
+  }
+
+  get currentUserHub(): string {
+    let hubId = null;
+    const userRef = this.db.list(`users/${this.user.uid}/hubs`);
+    const hubs = userRef.query.once('child_added', function(snapshot) {
+      hubId = snapshot.key;
+    });
+
+    return hubId;
   }
 
   signInWithGoogle() {

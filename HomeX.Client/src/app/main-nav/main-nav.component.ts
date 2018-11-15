@@ -16,6 +16,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class MainNavComponent implements OnInit {
   user: firebase.User;
+  hide = true;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
