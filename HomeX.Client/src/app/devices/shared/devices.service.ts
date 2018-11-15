@@ -7,6 +7,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class DevicesService {
   constructor(db: AngularFireDatabase) {
     const bla = db;
+    console.log(db.createPushId());
     console.log(bla);
   }
 

@@ -22,32 +22,32 @@
         <i class="fab fa-xing fa-lg" style="margin-left: 0px"></i>
       </span>
 
-
-      <!-- <div class="button-row">
-        <button 
-          mat-flat-button 
-          routerLink="devices"
-          routerLinkActive="active">
-          Devices
-        </button>
-        <button 
-          mat-flat-button="primary"
-          routerLink="rooms"
-          routerLinkActive="active">
-          Rooms
-        </button>
-      </div> -->
-
       <span class="example-spacer"></span>
+
       <button mat-icon-button style="margin-right:25px">
         <mat-icon routerLink="devices">device_hub</mat-icon>
       </button>
+
       <button mat-icon-button>
         <mat-icon matBadge="0" matBadgeColor="warn" matBadgeSize="medium">notifications</mat-icon>
       </button>
-      <button mat-icon-button>
+
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
         <mat-icon>person</mat-icon>
       </button>
+
+      <mat-menu #profileMenu="matMenu" style="margin: 0; padding: 0">
+        <mat-list style="background-color: #faf9fe; padding: 0; margin-top: -8px">
+          <mat-list-item>
+            <mat-icon mat-list-icon>face</mat-icon>
+            <h4 mat-line>User name</h4>
+            <p mat-line>User email</p>
+          </mat-list-item>
+        </mat-list>
+
+        <button mat-menu-item style="margin-top: 8px">Profile</button>
+        <button mat-menu-item (click)="auth.signOut()">Logout</button>
+      </mat-menu>
     </mat-toolbar>
 
     <!-- Add Content Here -->
