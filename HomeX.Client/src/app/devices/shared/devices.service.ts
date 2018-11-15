@@ -6,9 +6,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 @Injectable()
 export class DevicesService {
   constructor(db: AngularFireDatabase) {
-    const bla = db;
-    console.log(db.createPushId());
-    console.log(bla);
   }
 
   private _devices: BehaviorSubject<IDevice[]> = new BehaviorSubject<IDevice[]>([]);

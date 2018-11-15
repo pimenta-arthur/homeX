@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" *ngIf="auth.isAuthenticated">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'over'">
     <mat-toolbar class="main-nav-toolbar">
@@ -39,14 +39,14 @@
       <mat-menu #profileMenu="matMenu" style="margin: 0; padding: 0">
         <mat-list style="background-color: #faf9fe; padding: 0; margin-top: -8px">
           <mat-list-item>
-            <mat-icon mat-list-icon>face</mat-icon>
-            <h4 mat-line>User name</h4>
-            <p mat-line>User email</p>
+            <img matListAvatar src="{{auth.authState.photoURL}}" alt="photo">
+            <h4 mat-line>{{auth.authState.displayName}}</h4>
+            <p mat-line>{{auth.authState.email}}</p>
           </mat-list-item>
         </mat-list>
 
         <button mat-menu-item style="margin-top: 8px">Profile</button>
-        <button mat-menu-item (click)="auth.signOut()">Logout</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </mat-toolbar>
 

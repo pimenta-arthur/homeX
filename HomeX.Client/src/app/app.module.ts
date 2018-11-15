@@ -18,9 +18,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from './core/auth.guard';
 import { AuthService } from './core/auth.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, NotFoundComponent],
+  declarations: [AppComponent, MainNavComponent, NotFoundComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
