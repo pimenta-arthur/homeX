@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyB3xQaWVsLbC_RhEjgJO3ZobS1rPN_5ZEw',
-    authDomain: 'homex-6e369.firebaseapp.com',
-    databaseURL: 'https://homex-6e369.firebaseio.com',
-    projectId: 'homex-6e369',
-    storageBucket: 'homex-6e369.appspot.com',
-    messagingSenderId: '723851736195'
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: ''
   }
 };
 

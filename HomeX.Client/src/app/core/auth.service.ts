@@ -29,7 +29,11 @@ export class AuthService {
   }
 
   signInWithGoogle() {
+<<<<<<< HEAD
     this.afAuth.auth.signInWithRedirect(new auth.GoogleAuthProvider());
+=======
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+>>>>>>> 26d3217ebda88c31a894869d8d503e6fc2a2e121
   }
 
   signOut() {
