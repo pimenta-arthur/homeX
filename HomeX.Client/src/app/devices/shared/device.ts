@@ -5,6 +5,6 @@ export interface IDevice {
   name: string;
   nwkAddress?: string;
   roomId?: string;
-  type: IDeviceType;
+  type: any;
   status?: any;
 }

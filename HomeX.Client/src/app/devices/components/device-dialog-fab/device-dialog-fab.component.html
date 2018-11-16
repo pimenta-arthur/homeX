@@ -55,7 +55,7 @@
         </div>
       <!-- You are now done. -->
       <div>
-        <button mat-button *ngIf="isDeviceFound" mat-button [mat-dialog-close]="newDevice">Confirm</button>
+        <button mat-button *ngIf="isDeviceFound" mat-button [mat-dialog-close]="device">Confirm</button>
         <button mat-button (click)="stepper.reset()" *ngIf="!isDeviceFound">Reset</button>
         <button mat-button mat-dialog-close>Cancel</button>
       </div>

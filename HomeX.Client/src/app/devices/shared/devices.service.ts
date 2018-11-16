@@ -2,56 +2,111 @@ import { Injectable } from '@angular/core';
 import { IDevice } from './device';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
-import * as Collections from 'typescript-collections';
-import { AuthService } from 'src/app/core/auth.service';
+import { Dictionary } from 'typescript-collections';
+import { AuthService } from '../../core/auth.service';
 
 @Injectable()
 export class DevicesService {
   private _devices: BehaviorSubject<IDevice[]> = new BehaviorSubject<IDevice[]>(
     []
   );
-  // devices: any;
-  dic = new Collections.Dictionary<string, any>();
+  private _devicesDict: BehaviorSubject<
+    Dictionary<string, any>
+  > = new BehaviorSubject<Dictionary<string, any>>(
+    new Dictionary<string, any>()
+  );
 
-  constructor(db: AngularFireDatabase, private auth:  AuthService) {
-    console.log(auth.currentUser);
-    const hubDevices = db.list('hubs/-LRFGpldtgETG9teSTp3/devices');
-
-    hubDevices.stateChanges(['child_changed']).subscribe(actions => {
-      console.log('changed');
-      console.log(actions.key);
-      console.log(actions.payload.val());
-    });
-
-    hubDevices.stateChanges(['child_added']).subscribe(actions => {
-      console.log('added');
-      console.log(actions.key);
-      console.log(actions.payload.val());
-    });
-
-    hubDevices.stateChanges(['child_removed']).subscribe(actions => {
-      console.log('removed');
-      console.log(actions.key);
-      console.log(actions.payload.val());
-    });
+  constructor(private db: AngularFireDatabase) {}
+  
+  // TODO: essa funcão não vai existir, acões de adicionar, remover e atualizar dispositivos no banco
+  // serão todas feitas pelo hub
+  addDevice(device: IDevice, hubId: string): void {
+    const deviceRef = this.db.object(`hubs/${hubId}/devices/${device.id}`).update(device);
+    // const dict: Dictionary<string, any>  = this._devicesDict.getValue();
+    // dict.setValue(device.id, device);
+    // this._devicesDict.next(dict);
   }
 
-  addDevice(device: IDevice): void {
-    this._devices.next(this._devices.getValue().concat(device));
-  }
-
+  // TODO: essa funcão não vai existir, acões de adicionar, remover e atualizar dispositivos no banco
+  // serão todas feitas pelo hub
   removeDevice(device: IDevice): void {
-    const index = this._devices.getValue().indexOf(device);
-    if (index !== -1) {
-      this._devices.getValue().splice(index, 1);
-    }
+    // if (this._devicesDict.getValue().containsKey(device.id)) {
+    //   const dict: Dictionary<string, any> = this._devicesDict.getValue();
+    //   dict.remove(device.id);
+
+    //   this._devicesDict.next(dict);
+    // }
   }
 
-  get getDevices(): BehaviorSubject<IDevice[]> {
-    return this._devices;
+  // TODO: essa funcão não vai existir, acões de adicionar, remover e atualizar dispositivos no banco
+  // serão todas feitas pelo hub
+  updateDevice(device: IDevice): void {
+    // if (this._devicesDict.getValue().containsKey(device.id)) {
+    //   const dict: Dictionary<string, any> = this._devicesDict.getValue();
+    //   dict.setValue(device.id, device);
+
+    //   this._devicesDict.next(dict);
+    // }
   }
 
-  loadDevicesByUserHub(hubId: string): void {
-    console.log('load devices here');
+  get getDevices(): Observable<Dictionary<string, any>> {
+    return this._devicesDict;
+  }
+
+  listenDevicesByUserHub(hubId: string): void {
+    console.log('Listening hub devices');
+    const hubDevices = this.db.list(`hubs/${hubId}/devices`);
+
+    hubDevices.stateChanges(['child_changed']).subscribe(result => {
+      let device: IDevice;
+      device = <IDevice>result.payload.val();
+      device.id = result.key;
+
+      // this.updateDevice(device);
+      if (this._devicesDict.getValue().containsKey(device.id)) {
+        const dict: Dictionary<string, any> = this._devicesDict.getValue();
+        dict.setValue(device.id, device);
+
+        this._devicesDict.next(dict);
+      }
+
+      console.log('Device updated successfully');
+      console.log(this._devicesDict.getValue());
+    });
+
+    hubDevices.stateChanges(['child_added']).subscribe(result => {
+      let device: IDevice;
+      device = <IDevice>result.payload.val();
+      device.id = result.key;
+
+      // this._devicesDict.getValue().setValue(device.id, device);
+      // this.addDevice(device);
+      const dict: Dictionary<string, any> = this._devicesDict.getValue();
+      dict.setValue(device.id, device);
+
+      this._devicesDict.next(dict);
+
+      console.log('Device added successfully');
+      console.log(this._devicesDict.getValue());
+    });
+
+    hubDevices.stateChanges(['child_removed']).subscribe(result => {
+      let device: IDevice;
+      device = <IDevice>result.payload.val();
+      device.id = result.key;
+
+      // this._devicesDict.getValue().remove(result.key);
+      // this.removeDevice(device);
+      if (this._devicesDict.getValue().containsKey(device.id)) {
+        const dict: Dictionary<string, any> = this._devicesDict.getValue();
+        dict.remove(device.id);
+
+        this._devicesDict.next(dict);
+      }
+
+      console.log('Device removed successfully');
+
+      console.log(this._devicesDict.getValue());
+    });
   }
 }

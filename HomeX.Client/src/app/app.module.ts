@@ -51,7 +51,6 @@ import { DevicesService } from './devices/shared/devices.service';
   entryComponents: [],
   providers: [
     AuthGuard,
-    DevicesService,
     AuthService,
     {
       provide: MAT_STEPPER_GLOBAL_OPTIONS,

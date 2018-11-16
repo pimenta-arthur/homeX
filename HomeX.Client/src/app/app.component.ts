@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +8,7 @@ import { AuthService } from './core/auth.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
   ngOnInit(): void { }
 }

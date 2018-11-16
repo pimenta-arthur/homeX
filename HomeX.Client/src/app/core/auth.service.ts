@@ -5,9 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { DevicesService } from '../devices/shared/devices.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   authState: firebase.User = null;
   user: firebase.User = null;
@@ -18,7 +16,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private router: Router,
-    // private devicesService: DevicesService
+    private devicesService: DevicesService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user !== null) {
@@ -48,13 +46,16 @@ export class AuthService {
 
   queryUserHub(): void {
     const userRef = this.db.list(`users/${this.user.uid}/hub`);
-    const hubs = userRef.query.once('child_added')
+    const hubs = userRef.query.once('value')
     .then(result => {
       if (result) {
         console.log('Retrieved user hub successfully');
-        this.userHub = result.key;
+        this.userHub = Object.keys(result.val())[0];
+        console.log(this.userHub);
+
+        // load devices and start listening the
+        this.devicesService.listenDevicesByUserHub(this.userHub);
       }
-      console.log(this.userHub);
     })
     .catch(err => {
       console.log(err);

@@ -20,6 +20,7 @@ export class DeviceDialogFabComponent implements OnInit {
   deviceOptions: IDeviceType[];
   value = 0;
   labelFourthStep = 'Done';
+  device: IDevice = null;
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -75,12 +76,19 @@ export class DeviceDialogFabComponent implements OnInit {
   checkIfWasFound() {
     if (true) {
       this.newDevice = {
+        id: 'mac-address-here',
         name: this.newDeviceName,
         type: this.newDeviceType
       };
 
       this.labelFourthStep = 'Congratulations';
       this.isDeviceFound = true;
+
+      this.device = {
+        id: 'mac-address-here',
+        name: this.newDeviceName,
+        type: this.newDeviceType.id
+      };
     } else {
       this.labelFourthStep = 'Ops!';
       this.newDevice = null;

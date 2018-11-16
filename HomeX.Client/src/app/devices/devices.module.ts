@@ -34,6 +34,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [DevicesComponent, DeviceDialogFabComponent],
   entryComponents: [DeviceDialogFabComponent],
-  providers: []
+  providers: [DevicesService]
 })
 export class DevicesModule {}

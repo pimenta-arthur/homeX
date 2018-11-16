@@ -6,6 +6,7 @@ import { MatDialog, MatTableDataSource } from '@angular/material';
 import { DevicesService } from '../../shared/devices.service';
 import { IDevice } from '../../shared/device';
 import { DeviceType } from '../../shared/device-type';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-devices',
@@ -22,7 +23,8 @@ export class DevicesComponent implements OnInit {
   constructor(
     private roomsService: RoomsService,
     public dialog: MatDialog,
-    private devicesService: DevicesService
+    private devicesService: DevicesService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -30,8 +32,8 @@ export class DevicesComponent implements OnInit {
       this.rooms = data;
     });
 
-    this.devicesService.getDevices.subscribe(data => {
-      this.devices = data;
+    this.devicesService.getDevices.subscribe(dict => {
+      this.devices = dict.values();
 
       this.dataSource = new MatTableDataSource(this.devices);
     });
@@ -46,7 +48,9 @@ export class DevicesComponent implements OnInit {
       console.log('The dialog was closed');
       const device: IDevice = result;
       if (device) {
-        this.devicesService.addDevice(device);
+        // get user hub before add device to database
+        const hubId: string = this.auth.userHub;
+        this.devicesService.addDevice(device, hubId);
       }
     });
   }
