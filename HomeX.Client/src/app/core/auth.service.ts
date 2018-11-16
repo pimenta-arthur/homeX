@@ -12,7 +12,7 @@ export class AuthService {
   authState: firebase.User = null;
   user: firebase.User = null;
   isAuthenticated = false;
-  userHub: string;
+  userHub: string = null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -21,15 +21,15 @@ export class AuthService {
     // private devicesService: DevicesService
   ) {
     this.afAuth.authState.subscribe(user => {
-      console.log(user);
       if (user !== null) {
         this.authState = user;
         this.user = user;
         this.isAuthenticated = true;
-        this.userHub = this.currentUserHub;
         this.router.navigateByUrl('/home');
 
+        this.queryUserHub();
         console.log('User signed in');
+        console.log(user);
       } else {
         this.isAuthenticated = false;
 
@@ -46,14 +46,19 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
   }
 
-  get currentUserHub(): string {
-    let hubId = null;
-    const userRef = this.db.list(`users/${this.user.uid}/hubs`);
-    const hubs = userRef.query.once('child_added', function(snapshot) {
-      hubId = snapshot.key;
+  queryUserHub(): void {
+    const userRef = this.db.list(`users/${this.user.uid}/hub`);
+    const hubs = userRef.query.once('child_added')
+    .then(result => {
+      if (result) {
+        console.log('Retrieved user hub successfully');
+        this.userHub = result.key;
+      }
+      console.log(this.userHub);
+    })
+    .catch(err => {
+      console.log(err);
     });
-
-    return hubId;
   }
 
   signInWithGoogle() {
