@@ -62,3 +62,36 @@
 
   </mat-grid-tile>
 </mat-grid-list>
+
+
+<mat-grid-list [cols]="(isHandset$ | async) ? '1' : '4'" rowHeight="56px" [class.margin-grid]="!(isHandset$ | async)">
+    <mat-grid-tile *ngFor="let room of roomsDict.values()" [colspan]="1" [rowspan]="room.devices.length+1">
+      <mat-card class="room-card" [style.margin]="(isHandset$ | async) ? '0px' : '5px'">
+        <mat-card-header>
+          <mat-card-title>
+            {{ room.name }}
+          </mat-card-title>
+          <mat-card-subtitle *ngIf="roomToRename!=room">{{room.devices.length}} devices</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content [style.background]="room.color">
+          <mat-list role="list">
+            <mat-divider></mat-divider>
+            <mat-list-item role="listitem" class="list-row" *ngFor="let deviceId of room.devices" [ngSwitch]="devicesDict.getValue(deviceId).type.id">
+              <mat-divider></mat-divider>
+              <mat-icon mat-list-icon>{{ devicesDict.getValue(deviceId).type.icon }}</mat-icon>
+              <p mat-line>{{ devicesDict.getValue(deviceId).name }}</p>
+              <!-- device status display -->
+              <mat-slide-toggle *ngSwitchCase="0" color="primary"></mat-slide-toggle>
+              <p *ngSwitchCase="1">Open</p>
+              <p *ngSwitchCase="2">14ºC</p>
+              <p *ngSwitchCase="3">No</p>
+              <mat-slide-toggle *ngSwitchCase="4" color="primary"></mat-slide-toggle>
+              <!-- end device status display -->
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

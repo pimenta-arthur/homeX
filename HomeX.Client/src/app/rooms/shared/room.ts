@@ -5,5 +5,5 @@ export interface IRoom {
   color: string;
   cols: number;
   name: string;
-  devices: any;
+  devices: any[];
 }

@@ -11,9 +11,9 @@ export class RoomsService {
   private _rooms: BehaviorSubject<IRoom[]> = new BehaviorSubject<IRoom[]>([]);
 
   private _roomsDict: BehaviorSubject<
-    Dictionary<string, any>
-  > = new BehaviorSubject<Dictionary<string, any>>(
-    new Dictionary<string, any>()
+    Dictionary<string, IRoom>
+  > = new BehaviorSubject<Dictionary<string, IRoom>>(
+    new Dictionary<string, IRoom>()
   );
 
   addRoom(room: IRoom): void {
@@ -31,7 +31,7 @@ export class RoomsService {
     return this._rooms;
   }
 
-  get getRoomsDict(): Observable<Dictionary<string, any>> {
+  get getRoomsDict(): Observable<Dictionary<string, IRoom>> {
     return this._roomsDict;
   }
 
@@ -46,7 +46,7 @@ export class RoomsService {
 
       // this.updateDevice(device);
       if (this._roomsDict.getValue().containsKey(room.id)) {
-        const dict: Dictionary<string, any> = this._roomsDict.getValue();
+        const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
         dict.setValue(room.id, room);
 
         this._roomsDict.next(dict);
@@ -63,7 +63,7 @@ export class RoomsService {
 
       // this._devicesDict.getValue().setValue(device.id, device);
       // this.addDevice(device);
-      const dict: Dictionary<string, any> = this._roomsDict.getValue();
+      const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
       dict.setValue(room.id, room);
 
       this._roomsDict.next(dict);
@@ -80,7 +80,7 @@ export class RoomsService {
       // this._devicesDict.getValue().remove(result.key);
       // this.removeDevice(device);
       if (this._roomsDict.getValue().containsKey(room.id)) {
-        const dict: Dictionary<string, any> = this._roomsDict.getValue();
+        const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
         dict.remove(room.id);
 
         this._roomsDict.next(dict);

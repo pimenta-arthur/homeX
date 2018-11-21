@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Dictionary } from 'typescript-collections';
 import { AuthService } from '../../core/auth.service';
+import { DeviceType } from './device-type';
 
 @Injectable()
 export class DevicesService {
@@ -77,6 +78,7 @@ export class DevicesService {
     hubDevices.stateChanges(['child_added']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
+      device.type = DeviceType.propertiesOf(device.type);
       // device.macAddress = result.key;
 
       // this._devicesDict.getValue().setValue(device.id, device);
