@@ -17,11 +17,11 @@ export class DevicesService {
   );
 
   constructor(private db: AngularFireDatabase) {}
-  
+
   // TODO: essa funcão não vai existir, acões de adicionar, remover e atualizar dispositivos no banco
   // serão todas feitas pelo hub
   addDevice(device: IDevice, hubId: string): void {
-    const deviceRef = this.db.object(`hubs/${hubId}/devices/${device.id}`).update(device);
+    const deviceRef = this.db.object(`hubs/${hubId}/devices/${device.macAddress}`).update(device);
     // const dict: Dictionary<string, any>  = this._devicesDict.getValue();
     // dict.setValue(device.id, device);
     // this._devicesDict.next(dict);
@@ -60,12 +60,12 @@ export class DevicesService {
     hubDevices.stateChanges(['child_changed']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
-      device.id = result.key;
+      // device.macAddress = result.key;
 
       // this.updateDevice(device);
-      if (this._devicesDict.getValue().containsKey(device.id)) {
+      if (this._devicesDict.getValue().containsKey(device.macAddress)) {
         const dict: Dictionary<string, any> = this._devicesDict.getValue();
-        dict.setValue(device.id, device);
+        dict.setValue(device.macAddress, device);
 
         this._devicesDict.next(dict);
       }
@@ -77,12 +77,12 @@ export class DevicesService {
     hubDevices.stateChanges(['child_added']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
-      device.id = result.key;
+      // device.macAddress = result.key;
 
       // this._devicesDict.getValue().setValue(device.id, device);
       // this.addDevice(device);
       const dict: Dictionary<string, any> = this._devicesDict.getValue();
-      dict.setValue(device.id, device);
+      dict.setValue(device.macAddress, device);
 
       this._devicesDict.next(dict);
 
@@ -93,13 +93,13 @@ export class DevicesService {
     hubDevices.stateChanges(['child_removed']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
-      device.id = result.key;
+      // device.macAddress = result.key;
 
       // this._devicesDict.getValue().remove(result.key);
       // this.removeDevice(device);
-      if (this._devicesDict.getValue().containsKey(device.id)) {
+      if (this._devicesDict.getValue().containsKey(device.macAddress)) {
         const dict: Dictionary<string, any> = this._devicesDict.getValue();
-        dict.remove(device.id);
+        dict.remove(device.macAddress);
 
         this._devicesDict.next(dict);
       }

@@ -76,7 +76,7 @@ export class DeviceDialogFabComponent implements OnInit {
   checkIfWasFound() {
     if (true) {
       this.newDevice = {
-        id: 'mac-address-here',
+        macAddress: 'mac-address-here',
         name: this.newDeviceName,
         type: this.newDeviceType
       };
@@ -85,7 +85,7 @@ export class DeviceDialogFabComponent implements OnInit {
       this.isDeviceFound = true;
 
       this.device = {
-        id: 'mac-address-here',
+        macAddress: 'mac-address-here',
         name: this.newDeviceName,
         type: this.newDeviceType.id
       };

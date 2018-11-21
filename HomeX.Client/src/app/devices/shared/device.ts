@@ -1,7 +1,7 @@
 import { IDeviceType } from './device-type';
 
 export interface IDevice {
-  id?: string;
+  macAddress?: string;
   name: string;
   nwkAddress?: string;
   roomId?: string;

@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/core/auth.service';
 export class DevicesComponent implements OnInit {
   rooms: IRoom[];
   devices: IDevice[];
-  displayedColumns: string[] = ['devices'];
+  displayedColumns: string[] = ['name', 'macAddress', 'nwkAddress', 'type', 'roomId'];
   dataSource: MatTableDataSource<IDevice>;
 
 
