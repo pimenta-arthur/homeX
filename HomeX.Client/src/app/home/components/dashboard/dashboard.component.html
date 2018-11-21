@@ -18,8 +18,8 @@
           </mat-form-field>
         </mat-card-title>
 
-        <button mat-icon-button style="position: absolute;right: 0;top: 8px" [matMenuTriggerFor]="roomMenu">
-          <mat-icon aria-label="more options icon" *ngIf="roomToRename!=room">more_vert</mat-icon>
+        <button mat-icon-button style="position: absolute;right: 0;top: 8px" [matMenuTriggerFor]="roomMenu" *ngIf="roomToRename!=room">
+          <mat-icon aria-label="more options icon">more_vert</mat-icon>
         </button>
 
         <mat-menu #roomMenu="matMenu">
