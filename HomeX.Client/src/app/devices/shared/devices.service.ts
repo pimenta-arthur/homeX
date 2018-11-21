@@ -61,6 +61,7 @@ export class DevicesService {
     hubDevices.stateChanges(['child_changed']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
+      device.type = DeviceType.propertiesOf(device.type);
       // device.macAddress = result.key;
 
       // this.updateDevice(device);
@@ -95,6 +96,7 @@ export class DevicesService {
     hubDevices.stateChanges(['child_removed']).subscribe(result => {
       let device: IDevice;
       device = <IDevice>result.payload.val();
+      device.type = DeviceType.propertiesOf(device.type);
       // device.macAddress = result.key;
 
       // this._devicesDict.getValue().remove(result.key);

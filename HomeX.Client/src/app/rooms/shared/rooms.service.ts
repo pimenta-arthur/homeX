@@ -91,4 +91,16 @@ export class RoomsService {
       console.log(this._roomsDict.getValue());
     });
   }
+
+  updateRoomColorByUserHub(hubId: string, room: IRoom) {
+    console.log('Updated rooms color');
+    const hubRoomsRef = this.db.list(`hubs/${hubId}/rooms`);
+    hubRoomsRef.update(room.id, { color: room.color });
+  }
+
+  updateRoomNameByUserHub(hubId: string, room: IRoom) {
+    console.log('Updated rooms name');
+    const hubRoomsRef = this.db.list(`hubs/${hubId}/rooms`);
+    hubRoomsRef.update(room.id, { name: room.name });
+  }
 }

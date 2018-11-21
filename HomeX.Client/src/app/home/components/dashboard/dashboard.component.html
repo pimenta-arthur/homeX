@@ -9,22 +9,24 @@
 
         <mat-card-subtitle *ngIf="roomToRename!=room">{{room.devices.length}} devices</mat-card-subtitle>
 
-        <mat-form-field class="example-form-field" *ngIf="roomToRename==room">
-          <input matInput type="text" placeholder="Rename" [(ngModel)]="room.name" (focusout)="editRoomName()">
-          <button mat-button *ngIf="room.name" matSuffix mat-icon-button aria-label="Clear" (click)="editRoomName()">
-            <mat-icon>mode_edit</mat-icon>
-          </button>
-        </mat-form-field>
+        <mat-card-title style="margin-top: 5px; font-size: 15px" *ngIf="roomToRename==room">
+          <mat-form-field>
+            <input matInput type="text" placeholder="Rename" [(ngModel)]="room.name" (focusout)="changeRoomName(room)">
+            <button mat-button *ngIf="room.name" matSuffix mat-icon-button aria-label="Clear" (click)="changeRoomName(room)">
+              <mat-icon>mode_edit</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-card-title>
 
         <button mat-icon-button style="position: absolute;right: 0;top: 8px" [matMenuTriggerFor]="roomMenu">
-          <mat-icon aria-label="more options icon">more_vert</mat-icon>
+          <mat-icon aria-label="more options icon" *ngIf="roomToRename!=room">more_vert</mat-icon>
         </button>
 
         <mat-menu #roomMenu="matMenu">
           <button mat-menu-item>
             <span>Add device</span>
           </button>
-          <button mat-menu-item (click)="editRoomName(room)">
+          <button mat-menu-item (click)="setRoomToRename(room)">
             <span>Rename</span>
           </button>
           <button mat-menu-item [matMenuTriggerFor]="color">Color</button>

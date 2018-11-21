@@ -8,6 +8,7 @@ import { IRoom } from '../../../rooms/shared/room';
 import { RoomsService } from '../../../rooms/shared/rooms.service';
 import { Dictionary } from 'typescript-collections';
 import { DevicesService } from 'src/app/devices/shared/devices.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -128,7 +129,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private roomsService: RoomsService,
-    private devicesService: DevicesService
+    private devicesService: DevicesService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -170,15 +172,19 @@ export class DashboardComponent implements OnInit {
   }
 
   // TODO: figure out how to force a focus on the input text field after call this method
-  editRoomName(room?) {
+  setRoomToRename(room) {
     this.roomToRename = room;
+  }
+
+  changeRoomName(room) {
+    this.roomToRename = null;
+    const hubId = this.authService.userHub;
+    this.roomsService.updateRoomNameByUserHub(hubId, room);
   }
 
   changeRoomColor(color: string, room: IRoom) {
     room.color = color;
-    const changedRoom: IRoom = room;
-    if (this.roomsDict.containsKey(room.id)) {
-      this.roomsDict.setValue(room.id, changedRoom);
-    }
+    const hubId = this.authService.userHub;
+    this.roomsService.updateRoomColorByUserHub(hubId, room);
   }
 }
