@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { DevicesService } from '../devices/shared/devices.service';
+import { RoomsService } from '../rooms/shared/rooms.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private router: Router,
-    private devicesService: DevicesService
+    private devicesService: DevicesService,
+    private roomsService: RoomsService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user !== null) {
@@ -53,8 +55,11 @@ export class AuthService {
         this.userHub = Object.keys(result.val())[0];
         console.log(this.userHub);
 
-        // load devices and start listening the
+        // load devices and start listening the events
         this.devicesService.listenDevicesByUserHub(this.userHub);
+
+        // load rooms and start listening the events
+        this.roomsService.listenRoomsByUserHub(this.userHub);
       }
     })
     .catch(err => {

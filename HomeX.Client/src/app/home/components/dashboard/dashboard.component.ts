@@ -6,6 +6,7 @@ import { IDevice } from '../../../devices/shared/device';
 import { DeviceType } from '../../../devices/shared/device-type';
 import { IRoom } from '../../../rooms/shared/room';
 import { RoomsService } from '../../../rooms/shared/rooms.service';
+import { Dictionary } from 'typescript-collections';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   roomToRename: IRoom;
   rooms: IRoom[];
   roomColors: string[];
+  roomsDict: Dictionary<string, any>;
 
   devicesRoom1: IDevice[] = [
     { name: 'Outside Light', type: DeviceType.propertiesOf(DeviceType.Light) },
@@ -130,6 +132,10 @@ export class DashboardComponent implements OnInit {
     this.roomsService.getRooms.subscribe(data => {
       const rooms = this.roomsFixed.concat(data);
       this.rooms = rooms;
+    });
+
+    this.roomsService.getRoomsDict.subscribe(data => {
+      this.roomsDict = data;
     });
 
     // TODO: retrieve the colors from the database
