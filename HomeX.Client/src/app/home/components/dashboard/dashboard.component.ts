@@ -132,17 +132,17 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.roomsService.getRooms.subscribe(data => {
-      const rooms = this.roomsFixed.concat(data);
-      this.rooms = rooms;
-    });
+    // this.roomsService.getRooms.subscribe(data => {
+    //   const rooms = this.roomsFixed.concat(data);
+    //   this.rooms = rooms;
+    // });
 
     this.roomsService.getRoomsDict.subscribe(data => {
       this.roomsDict = data;
-      const x = this.roomsDict.values();
-      if (x.length > 0) {
-        console.log('vrau', x[0].devices);
-      }
+      // const x = this.roomsDict.values();
+      // if (x.length > 0) {
+      //   console.log('vrau', x[0].devices);
+      // }
     });
 
     this.devicesService.getDevices.subscribe(data => {
@@ -176,5 +176,9 @@ export class DashboardComponent implements OnInit {
 
   changeRoomColor(color: string, room: IRoom) {
     room.color = color;
+    const changedRoom: IRoom = room;
+    if (this.roomsDict.containsKey(room.id)) {
+      this.roomsDict.setValue(room.id, changedRoom);
+    }
   }
 }
