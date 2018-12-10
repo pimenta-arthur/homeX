@@ -16,15 +16,16 @@ export class RoomsService {
     new Dictionary<string, IRoom>()
   );
 
-  addRoom(room: IRoom): void {
-    this._rooms.next(this._rooms.getValue().concat(room));
+  addRoom(room: IRoom, hubId: string): void {
+    // this._rooms.next(this._rooms.getValue().concat(room));
+    const deviceRef = this.db.list(`hubs/${hubId}/rooms`).push(room);
   }
 
   removeRoom(room: IRoom): void {
-    const index = this._rooms.getValue().indexOf(room);
-    if (index !== -1) {
-      this._rooms.getValue().splice(index, 1);
-    }
+    // const index = this._rooms.getValue().indexOf(room);
+    // if (index !== -1) {
+    //   this._rooms.getValue().splice(index, 1);
+    // }
   }
 
   get getRooms(): BehaviorSubject<IRoom[]> {
@@ -44,6 +45,10 @@ export class RoomsService {
       room = <IRoom>result.payload.val();
       room.id = result.key;
 
+      if (room.devices === undefined) {
+        room.devices = [];
+      }
+
       // this.updateDevice(device);
       if (this._roomsDict.getValue().containsKey(room.id)) {
         const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
@@ -61,6 +66,9 @@ export class RoomsService {
       room = <IRoom>result.payload.val();
       room.id = result.key;
 
+      if (room.devices === undefined) {
+        room.devices = [];
+      }
       // this._devicesDict.getValue().setValue(device.id, device);
       // this.addDevice(device);
       const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();

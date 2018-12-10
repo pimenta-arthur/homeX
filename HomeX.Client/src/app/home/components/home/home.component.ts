@@ -4,6 +4,7 @@ import { HomeDialogFabComponent } from '../home-dialog-fab/home-dialog-fab.compo
 import { RoomsService } from '../../../rooms/shared/rooms.service';
 import { IRoom } from '../../../rooms/shared/room';
 import { IDevice } from '../../../devices/shared/device';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,11 @@ export class HomeComponent implements OnInit {
   roomName: string;
   userName: string;
 
-  constructor(public dialog: MatDialog, private roomsService: RoomsService) {}
+  constructor(
+    public dialog: MatDialog,
+    private roomsService: RoomsService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {}
 
@@ -29,13 +34,15 @@ export class HomeComponent implements OnInit {
         this.roomName = result;
 
         const room: IRoom = {
-          color: 'white',
-          cols: 1,
+          color: 'None',
+          // cols: 1,
           name: this.roomName,
-          devices: new Array<IDevice>()
+          devices: new Array<any>()
         };
 
-        this.roomsService.addRoom(room);
+        // get user hub before add device to database
+        const hubId: string = this.auth.userHub;
+        this.roomsService.addRoom(room, hubId);
       }
     });
   }
