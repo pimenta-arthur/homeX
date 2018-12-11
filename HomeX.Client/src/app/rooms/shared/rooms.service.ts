@@ -45,8 +45,12 @@ export class RoomsService {
       room = <IRoom>result.payload.val();
       room.id = result.key;
 
-      if (room.devices === undefined) {
+      if (typeof room.devices === 'undefined') {
+        // atribui uma array vazia
         room.devices = [];
+      } else {
+        // retorna as propriedades do json devices como array
+        room.devices = Object.keys(room.devices);
       }
 
       // this.updateDevice(device);
@@ -66,11 +70,14 @@ export class RoomsService {
       room = <IRoom>result.payload.val();
       room.id = result.key;
 
-      if (room.devices === undefined) {
+      if (typeof room.devices === 'undefined') {
+        // atribui uma array vazia
         room.devices = [];
+      } else {
+        // retorna as propriedades do json devices como array
+        room.devices = Object.keys(room.devices);
       }
-      // this._devicesDict.getValue().setValue(device.id, device);
-      // this.addDevice(device);
+      
       const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
       dict.setValue(room.id, room);
 
@@ -85,8 +92,6 @@ export class RoomsService {
       room = <IRoom>result.payload.val();
       room.id = result.key;
 
-      // this._devicesDict.getValue().remove(result.key);
-      // this.removeDevice(device);
       if (this._roomsDict.getValue().containsKey(room.id)) {
         const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
         dict.remove(room.id);
