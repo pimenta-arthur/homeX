@@ -39,15 +39,10 @@ export class DevicesService {
     // }
   }
 
-  // TODO: essa funcão não vai existir, acões de adicionar, remover e atualizar dispositivos no banco
-  // serão todas feitas pelo hub
-  updateDevice(device: IDevice): void {
-    // if (this._devicesDict.getValue().containsKey(device.id)) {
-    //   const dict: Dictionary<string, any> = this._devicesDict.getValue();
-    //   dict.setValue(device.id, device);
-
-    //   this._devicesDict.next(dict);
-    // }
+  updateDeviceRoomIdByUserHub(hubId: string, deviceId: string, roomId: string): void {
+    console.log('Updated devices roomId');
+    const hubRoomsRef = this.db.list(`hubs/${hubId}/devices`);
+    hubRoomsRef.update(deviceId, {roomId: roomId});
   }
 
   get getDevices(): Observable<Dictionary<string, any>> {

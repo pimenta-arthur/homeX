@@ -17,7 +17,6 @@ export class RoomsService {
   );
 
   addRoom(room: IRoom, hubId: string): void {
-    // this._rooms.next(this._rooms.getValue().concat(room));
     const deviceRef = this.db.list(`hubs/${hubId}/rooms`).push(room);
   }
 
@@ -77,7 +76,7 @@ export class RoomsService {
         // retorna as propriedades do json devices como array
         room.devices = Object.keys(room.devices);
       }
-      
+
       const dict: Dictionary<string, IRoom> = this._roomsDict.getValue();
       dict.setValue(room.id, room);
 
@@ -115,5 +114,17 @@ export class RoomsService {
     console.log('Updated rooms name');
     const hubRoomsRef = this.db.list(`hubs/${hubId}/rooms`);
     hubRoomsRef.update(room.id, { name: room.name });
+  }
+
+  addDeviceToRoomByUserHub(hubId: string, deviceId: string, roomId: string) {
+    console.log('Updated room devices');
+    const hubRoomsRef = this.db.list(`hubs/${hubId}/rooms/${roomId}`);
+    hubRoomsRef.update('devices', {[deviceId]: true});
+  }
+
+  removeDerviceFromRoomByUserHub(hubId: string, deviceId: string, roomId: string) {
+    console.log('Removed device from room');
+    const hubRoomsRef = this.db.list(`hubs/${hubId}/rooms/${roomId}/devices`);
+    hubRoomsRef.remove(deviceId);
   }
 }

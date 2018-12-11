@@ -187,4 +187,27 @@ export class DashboardComponent implements OnInit {
     const hubId = this.authService.userHub;
     this.roomsService.updateRoomColorByUserHub(hubId, room);
   }
+
+  addDeviceToRoom(deviceId: any, roomId: any) {
+    const device = this.devicesDict.getValue(deviceId);
+    // let devicePreviousRoom = null;
+
+    // console.log('TYPEEEE', typeof device.roomId);
+    // if (typeof device.roomId !== 'undefined') {
+    //   devicePreviousRoom = ;
+    // }
+    const hubId = this.authService.userHub;
+
+    this.roomsService.addDeviceToRoomByUserHub(hubId, deviceId, roomId);
+    this.devicesService.updateDeviceRoomIdByUserHub(hubId, deviceId, roomId);
+
+    console.log('TYPEEEE', typeof device.roomId);
+    if (typeof device.roomId !== 'undefined') {
+      this.roomsService.removeDerviceFromRoomByUserHub(hubId, deviceId, device.roomId);
+    }
+  }
+
+  deviceIsNotInRoom(deviceId: string, roomDevices: string[]) {
+    return !roomDevices.includes(deviceId);
+  }
 }
